@@ -47,7 +47,7 @@
                 </svg>
                 <p class="text-gray-500">Arrasta tus archivos</p>
                 <p class="text-gray-400">O <span class="text-blue-500 underline">click aquí</span> para seleccionar un archivo</p>
-                <input id="fileInput" type="file" name="file" class="hidden" onchange="previewImage(event)" accept=".pdf">
+                <input id="fileInput" type="file" name="file" class="hidden" onchange="previewImage(event)">
 
                 <div id="nombreArchivo" class="archivo-nombre">
                     Ningún archivo seleccionado

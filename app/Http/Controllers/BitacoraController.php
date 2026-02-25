@@ -38,6 +38,7 @@ class BitacoraController extends Controller
             'file' => 'required|mimes:pdf|max:2048',
         ],[
             'file.required' => 'El archivo es requerido',
+            'file.mimes' => 'El archivo debe ser pdf',
         ]);
 
         $archivo = $request->file('file');
@@ -50,18 +51,18 @@ class BitacoraController extends Controller
 
         try {
 
+
+
             bitacora::create([
                 'file' => $documento,
                 'users_id' => Auth::id(),
             ]);
 
             DB::commit();
-
             return redirect()->route('Bitacoras.index')->with('success', 'La bitácora ha sido creada correctamente');
-
         }catch (\Exception $e){
             DB::rollBack();
-            return  $e->getMessage();
+            return back()->with('error', 'Error al cargar bitácora');
         }
 
 
