@@ -1,0 +1,8 @@
+ .relative.overflow-x-auto {
+     overflow: visible !important;
+ }
+
+ .table-responsive,
+ .card-body {
+     overflow: visible !important;
+ }
