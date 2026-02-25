@@ -20,7 +20,7 @@ class alternativa extends Model
     /*
     protected $casts = [
         'password' => 'hashed',
-    ];
+    ];..
 */
     // Una alternativa tiene muchos subtipos
     public function subtipos_alternativa() {
