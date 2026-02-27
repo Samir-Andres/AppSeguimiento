@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EpsController;
+use App\Http\Controllers\QrCodeController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,9 +74,9 @@ Route::get('/clear', function () {
 
 Route::resource('/Aprendices', AprendicesController::class)->middleware('auth');
 Route::resource('/Bitacoras', BitacoraController::class)->middleware('auth');
+Route::get('/Bitacora/{id}/download', [BitacoraController::class, 'download'] )->name('bitacora.download')->middleware('auth');
 
-
-
+Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->middleware('auth');
 
 
 

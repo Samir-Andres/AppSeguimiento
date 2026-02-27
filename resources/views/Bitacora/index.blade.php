@@ -115,6 +115,10 @@
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                             <i class="fa-solid fa-eye w-5"></i> Ver
                                         </a>
+                                        <a href="{{route('bitacora.download', $item->id)}}"
+                                           class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-green-100 hover:text-gray-900 rounded-md transition-colors duration-150">
+                                            <i class="fas fa-download w-5"></i>  Descargar
+                                        </a>
 
                                         <a href="{{ route('Bitacoras.edit', $item->id) }}"
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
@@ -159,6 +163,8 @@
         {{ $bitacora->links() }}
     </div>
 
+
+      <a href="{{route('bitacora.qr')}}">Ir</a>
 
     <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
     </div>

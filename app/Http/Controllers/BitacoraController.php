@@ -102,4 +102,21 @@ class BitacoraController extends Controller
     {
         //
     }
+
+    public function download($id)
+    {
+        $bitacora = bitacora::findOrFail($id);
+
+        $ruta = public_path($bitacora->file);
+
+        if (file_exists($ruta)) {
+            return response()->download($ruta);
+        }
+
+        return back()->with('error', 'No existe el archivo');
+
+    }
+
+
+
 }
