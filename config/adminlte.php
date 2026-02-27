@@ -336,7 +336,7 @@ return [
                 [
                     'text' => 'Aprendices',
                     'url' => '/Aprendices',
-                    'icon' => 'fa-solid fa-user-graduate',
+                    'icon' => 'fas fa-user-graduate',
                 ],
                 [
                     'text' => 'Bitácoras',

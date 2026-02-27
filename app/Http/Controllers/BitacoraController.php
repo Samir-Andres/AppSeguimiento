@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\alternativa;
 use App\Models\bitacora;
+use App\Notifications\BitacoraEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 
 class BitacoraController extends Controller
 {
@@ -55,6 +57,9 @@ class BitacoraController extends Controller
                 'file' => 'Documentos/bitacoras/' . $documento,
                 'users_id' => Auth::id(),
             ]);
+
+            $user = Auth::user();
+            $user->notify(new BitacoraEmail($user->name, $user->email, $user->created_at));
 
             DB::commit();
             return redirect()->route('Bitacoras.index')->with('success', 'La bitácora ha sido creada correctamente');

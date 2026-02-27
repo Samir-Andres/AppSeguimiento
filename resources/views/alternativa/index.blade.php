@@ -52,7 +52,7 @@
 
     <div class="relative overflow-x-auto sm:overflow-visible shadow-md sm:rounded-lg">
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-left text-gray-500" id="auxiliares">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3">Id</th>
