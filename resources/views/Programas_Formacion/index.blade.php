@@ -79,8 +79,8 @@
                         </td>
                         <td class="px-6 py-3 whitespace-nowrap">
 
-                            @if ($programa->Observacaiones)
-                                <span class="text-gray-900 font-medium">{{ $programa->Observacaiones }}</span>
+                            @if ($programa->Observaciones)
+                                <span class="text-gray-900 font-medium">{{ $programa->Observaciones }}</span>
                             @else
                                 <span class="text-gray-400 italic">No tiene información</span>
                             @endif

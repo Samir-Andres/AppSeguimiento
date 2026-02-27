@@ -310,89 +310,45 @@ return [
         [
             'text' => 'Dashboard',
             'url' => '/home',
-            'icon' => 'fas fa-regular fa-house'
+            'icon' => 'fas fa-home'
         ],
 
         [
             'text' => 'Registros',
-            'icon' => 'fa-solid fa-circle-plus',
+            'icon' => 'fas fa-plus-circle',
             'icon_color' => 'success',
             'submenu' => [
                 [
                     'text' => 'Eps',
                     'url' => '/Eps/index',
-                    'icon' => 'fa-regular fa-address-card',
+                    'icon' => 'fas fa-hospital',
                 ],
                 [
-                    'text' => 'Roles Administrativos',
+                    'text' => 'Roles',
                     'url' => '/Roles/index',
-                    'icon' => 'fa-regular fa-address-card',
+                    'icon' => 'fas fa-users-cog',
                 ],
                 [
                     'text' => 'Tipo de Documento',
                     'url' => '/Tipo/Documentos/index',
-                    'icon' => 'fa-regular fa-address-card',
+                    'icon' => 'fas fa-id-card',
                 ],
                 [
                     'text' => 'Aprendices',
                     'url' => '/Aprendices',
-                    'icon' => 'fa-regular fa-address-card',
+                    'icon' => 'fa-solid fa-user-graduate',
                 ],
                 [
                     'text' => 'Bitácoras',
                     'url' => '/Bitacoras',
-                    'icon' => 'fa-regular fa-address-card',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'icon' => 'far fa-file-pdf',
                 ],
             ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
         ],
         ['header' => 'account_settings'],
 
         [
-            'text' => 'change_password',
+            'text' => 'Contraseña',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock text-primary',
         ],

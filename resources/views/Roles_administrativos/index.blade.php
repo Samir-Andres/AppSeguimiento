@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Alternativa')
+@section('title', 'Roles Administrativos')
 
 
 @section('content_header')
@@ -90,19 +90,19 @@
                                     <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                        <a href="{{route('alternativa.show', $item->NIS)}}"
+                                        <a href=""
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                             <i class="fa-solid fa-eye w-5"></i> Ver
                                         </a>
 
-                                        <a href="{{ route('alternativas.edit', $item->NIS) }}"
+                                        <a href=""
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                             <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                         </a>
 
                                         <div class="my-1 border-t border-gray-100"></div>
 
-                                        <form action="{{ route('alternativas.delete', $item->NIS) }}" method="POST"
+                                        <form action="" method="POST"
                                               class="form-eliminar">
                                             @csrf
                                             @method('DELETE')

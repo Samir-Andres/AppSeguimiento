@@ -129,7 +129,7 @@ class ProgramaformacionController extends Controller
             $programa->update([
                 'Codigo' => $request->Codigo,
                 'Denominacion' => $request->Denominacion,
-                'Observacaiones' => $request->Observacaiones
+                'Observaciones' => $request->Observaciones
             ]);
 
             DB::commit();

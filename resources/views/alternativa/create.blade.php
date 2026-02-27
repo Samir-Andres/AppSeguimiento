@@ -63,6 +63,7 @@
                 </select>
             </div>
 
+
             @error('estado')
                 <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
             @enderror

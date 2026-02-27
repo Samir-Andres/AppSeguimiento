@@ -70,11 +70,11 @@
             @enderror
 
             <label for="message" class="font-medium mt-4">Observaciones</label>
-            <textarea name="Observacaiones" rows="4"
-                      class="w-full mt-2 p-3 bg-transparent border {{ $errors->has('Observacaiones') ? 'border-red-500' : 'border-slate-300' }} rounded-xl resize-none outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
-                      placeholder="Detalles de la alternativa">{{ old('Observacaiones', $programa->Observacaiones) }}</textarea>
+            <textarea name="Observaciones" rows="4"
+                      class="w-full mt-2 p-3 bg-transparent border {{ $errors->has('Observaciones') ? 'border-red-500' : 'border-slate-300' }} rounded-xl resize-none outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+                      placeholder="Detalles de la alternativa">{{ old('Observaciones', $programa->Observaciones) }}</textarea>
 
-            @error('Observacaiones')
+            @error('Observaciones')
             <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
             @enderror
 

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Programas')
+@section('title', 'Tipos de documentos')
 
 
 @section('content_header')
@@ -17,7 +17,7 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Programas Formación</a>
+        <a class="text-indigo-500">Tipo de documentos</a>
 
     </div>
 
@@ -34,7 +34,7 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Centro de registro </strong>Puedes registrar programas de formación
+                <strong class="font-semibold uppercase">Centro de registro Tipos de documentos</strong> Puedes registrar programas de formación
             </p>
             <a href="{{route('Programas.create')}}"
                class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i>

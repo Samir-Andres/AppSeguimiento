@@ -15,7 +15,7 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        $bitacora =  Bitacora::paginate();
+        $bitacora =  Bitacora::where('users_id', Auth::id())->paginate(10);
         return view('Bitacora.index', compact('bitacora'));
     }
 
@@ -51,10 +51,8 @@ class BitacoraController extends Controller
 
         try {
 
-
-
             bitacora::create([
-                'file' => $documento,
+                'file' => 'Documentos/bitacoras/' . $documento,
                 'users_id' => Auth::id(),
             ]);
 
@@ -73,7 +71,7 @@ class BitacoraController extends Controller
      */
     public function show(bitacora $bitacora)
     {
-        //
+
     }
 
     /**

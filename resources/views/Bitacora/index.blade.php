@@ -78,8 +78,8 @@
                             </td>
 
                             <td class="px-6 py-3 whitespace-nowrap">
-                                <a href="{{ asset('Documentos/bitacoras/'.$item->file) }}" target="_blank" title="Ver">
-                                    <i class="bi bi-filetype-pdf text-red-500"></i>
+                                <a href="{{ asset($item->file) }}" target="_blank" title="Ver">
+                                    <i class="bi bi-filetype-pdf text-red-500"></i> </a>
                             </td>
 
                             <td class="px-6 py-3 whitespace-nowrap">
