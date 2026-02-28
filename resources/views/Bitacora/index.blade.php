@@ -62,6 +62,7 @@
                         <th scope="col" class="px-6 py-3">Archivo</th>
                         <th scope="col" class="px-6 py-3">Aprendiz</th>
                         <th scope="col" class="px-6 py-3">Hora de creación</th>
+                        <th scope="col" class="px-6 py-3">Hora de actualización</th>
                         <th scope="col" class="px-6 py-3">Acción</th>
 
                     </tr>
@@ -99,7 +100,13 @@
 
 
                             </td>
+                            <td class="px-6 py-3 whitespace-nowrap">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                           {{$item->updated_at->diffForHumans()}}
+                                    </span>
 
+                            </td>
 
                             <td class="px-10 py-3">
                                 <div class="dropdown">

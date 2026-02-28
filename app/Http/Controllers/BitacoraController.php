@@ -82,17 +82,69 @@ class BitacoraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(bitacora $bitacora)
+    public function edit($id)
     {
-        //
+       $bitacora = bitacora::findOrFail($id);
+
+        return view('Bitacora.edit', compact('bitacora'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, bitacora $bitacora)
+    public function update(Request $request, $id)
     {
-        //
+
+
+
+        $request->validate([
+            'file' => 'mimes:pdf|max:2048',
+
+        ],
+        [
+             'file.mimes' => 'El archivo debe ser pdf',
+             'file.max' => 'El archivo no debe ser mayor a 2mb',
+        ]
+        );
+
+        DB::beginTransaction();
+
+        try {
+
+            $bitacora = bitacora::findOrFail($id);
+
+            if ($request->hasFile('file')) {
+
+                $rutaAntigua = public_path($bitacora->file);
+
+                if (file_exists($rutaAntigua) && !empty($bitacora->file) ) {
+                    unlink($rutaAntigua);
+                }
+
+                $archivo = $request->file('file');
+
+                $documento = 'Doc_' . Auth::id() . '_' . time() . '.' . $archivo->getClientOriginalExtension();
+                $archivo->move(public_path('Documentos/bitacoras'), $documento);
+
+               $bitacora->update([
+                    'file' => 'Documentos/bitacoras/' . $documento,
+                ]);
+
+            }
+
+
+            DB::commit();
+
+            return back()->with('success', 'Archivo actualizado correctamente');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            return back()->with('error', 'Error al actualizar');
+
+        }
+
+
+
     }
 
     /**
