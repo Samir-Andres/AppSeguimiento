@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 cancelButtonColor: '#64748b',
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar',
-                width: '400px',
+                width: '500px',
                 timer: 6000,
                 timerProgressBar: true,
 

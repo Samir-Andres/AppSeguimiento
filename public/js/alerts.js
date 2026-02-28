@@ -9,17 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
             title: '¡Exito!',
             text: successMsg,
             timer: 3000,
-            width: '400px', 
-            padding: '1em', 
+            width: '500px',
+            padding: '1em',
             color: '#1e293b',
             confirmButtonColor: '#6366f1',
              timerProgressBar: true,
 
                  didOpen: () => {
-                
+
                     const timer = Swal.getPopup().querySelector("b");
                 }
-       
+
         });
     }
 

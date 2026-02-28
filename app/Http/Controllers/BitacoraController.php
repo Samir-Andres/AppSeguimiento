@@ -98,9 +98,30 @@ class BitacoraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(bitacora $bitacora)
+    public function destroy($id)
     {
-        //
+
+        DB::beginTransaction();
+
+        try {
+
+            $bitacora = bitacora::findOrFail($id);
+
+            $ruta = public_path($bitacora->file);
+
+            $bitacora->delete();
+            DB::commit();
+
+            if (file_exists($ruta) && !empty($bitacora->file)) {
+                unlink($ruta);
+            }
+
+            return back()->with('success', 'Bitácora eliminada correctamente');
+        }catch (\Exception $e){
+            DB::rollBack();
+            return back()->with('error', 'Error al borrar la bitácora');
+        }
+
     }
 
     public function download($id)
@@ -116,7 +137,5 @@ class BitacoraController extends Controller
         return back()->with('error', 'No existe el archivo');
 
     }
-
-
 
 }
