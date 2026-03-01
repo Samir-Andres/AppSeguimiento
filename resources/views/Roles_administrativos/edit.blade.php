@@ -33,9 +33,9 @@
 
     <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}"></div>
 
-    <form action="{{route('Rolesadministrativos.store')}}" method="POST" id="main-form" style="display: none;" class="flex flex-col items-center text-sm text-slate-800 p-6 bg-white shadow-xl rounded-2xl border border-slate-100">
+    <form action="{{route('Rolesadministrativos.update', $rol->NIS)}}" method="POST" id="main-form" style="display: none;" class="flex flex-col items-center text-sm text-slate-800 p-6 bg-white shadow-xl rounded-2xl border border-slate-100">
         @csrf
-
+        @method('PUT')
 
         <h1 class="text-4xl font-bold py-4 text-center">Editar rol</h1>
 
@@ -45,7 +45,7 @@
             <div
                 class="flex items-center mt-2 mb-1 h-10 pl-3 border {{ $errors->has('nombre') ? 'border-red-500' : 'border-slate-300' }} rounded-full focus-within:ring-2 focus-within:ring-indigo-400 transition-all overflow-hidden">
                 <input type="text" name="nombre" class="h-full px-2 w-full outline-none bg-transparent"
-                       placeholder="Eje: admin" value="{{ old('nombre') }}">
+                       placeholder="Eje: admin" value="{{ old('nombre', $rol->nombre) }}">
             </div>
             @error('nombre')
             <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
@@ -54,9 +54,7 @@
             <label for="descripcion" class="font-medium mt-4 block">Descripción del rol</label>
             <textarea name="descripcion" rows="4"
                       class="w-full mt-2 p-3 bg-transparent border {{ $errors->has('descripcion') ? 'border-red-500' : 'border-slate-300' }} rounded-xl resize-none outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
-                      placeholder="Ejem: Encargado de administrar">{{ old('descripcion') }}
-
-            </textarea>
+                      placeholder="Ejem: Encargado de administrar">{{ old('descripcion', $rol->descripcion) }}</textarea>
 
             @error('descripcion')
             <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
@@ -64,7 +62,7 @@
 
             <button type="submit"
                     class="flex items-center justify-center gap-2 mt-6 bg-indigo-500 hover:bg-indigo-600 text-white py-2.5 w-full rounded-full transition shadow-lg shadow-indigo-200">
-                Crear rol
+                Actualizar rol
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="m18.038 10.663-5.625 5.625a.94.94 0 0 1-1.328-1.328l4.024-4.023H3.625a.938.938 0 0 1 0-1.875h11.484l-4.022-4.025a.94.94 0 0 1 1.328-1.328l5.625 5.625a.935.935 0 0 1-.002 1.33"

@@ -5,6 +5,9 @@
 
 @section('content_header')
 
+    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
+    </div>
+
     <div class="flex flex-wrap  items-center space-x-2 text-sm text-gray-500 font-medium">
         <a href="{{ route('home') }}" type="button" aria-label="Home" title="Dashboard">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,8 +149,7 @@
 
 @endsection
 
-    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
-    </div>
+
 
     @section('css')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">

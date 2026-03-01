@@ -46,6 +46,7 @@ class RolesadministrativosController extends Controller
 
             'descripcion.regex' => 'El campo descripción debe ser una cadena de texto',
             'descripcion.max' => 'El campo descripción no puede superar los 100 caracteres',
+            'descripcion.min' => 'El campo descripción no debe ser menor que 5 caracteres',
         ]);
 
         DB::beginTransaction();
@@ -76,7 +77,7 @@ class RolesadministrativosController extends Controller
      */
     public function edit($NIS)
     {
-        $rol = entecoformadores::findOrFail($NIS);
+        $rol = rolesadministrativos::findOrFail($NIS);
 
         return view('Roles_administrativos.edit', compact('rol'));
     }
@@ -84,16 +85,57 @@ class RolesadministrativosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, rolesadministrativos $rolesadministrativos)
+    public function update(Request $request, $NIS)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:50|min:5|regex:/^[a-zA-Z\s]+$/u',
+            'descripcion' => 'nullable|string|max:100|min:5|regex:/^[a-zA-Z\s]+$/u',
+        ],
+        [
+            'nombre.required' => 'El campo nombre es obligatorio',
+            'nombre.max' => 'El campo nombre no puede superar los 50 caracteres',
+            'nombre.regex' => 'El campo nombre debe ser una cadena de texto',
+            'nombre.min' => 'El campo nombre debe tener mínimo 5 caracteres',
+
+            'descripcion.regex' => 'El campo descripción debe ser una cadena de texto',
+            'descripcion.max' => 'El campo descripción no puede superar los 100 caracteres',
+            'descripcion.min' => 'El campo descripción no debe ser menor que 5 caracteres',
+
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $rol = rolesadministrativos::findOrFail($NIS);
+
+            $rol->update($request->all());
+            DB::commit();
+            return redirect()->route('Rolesadministrativos.index')->with('success', 'El rol se ha actualizado correctamente');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+            return back()->with('error', 'El rol no se ha podido actualizar');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(rolesadministrativos $rolesadministrativos)
+    public function destroy($NIS)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+
+            $rol = rolesadministrativos::findOrFail($NIS);
+            $rol->delete();
+            DB::commit();
+            return redirect()->route('Rolesadministrativos.index')->with('success', 'El rol se ha eliminado correctamente');
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return back()->with('error', 'El rol no se ha podido eliminar');
+        }
     }
 }

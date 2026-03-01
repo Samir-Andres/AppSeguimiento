@@ -8,7 +8,7 @@ class rolesadministrativos extends Model
 {
     protected $table = 'tbl_roles_administrativos';
     protected $primaryKey = 'NIS';
-    public $incrementing = false;
+    public $incrementing = true;
     public $timestamps = false;
 
     protected $fillable = [
