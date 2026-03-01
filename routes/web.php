@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EpsController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\EntecoformadoresController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -67,6 +68,7 @@ Route::get('/Roles/index', [RolesadministrativosController::class, 'index'])->na
 // Ruta al index de Tipo de documentos
 Route::get('/Tipo/Documentos/index', [TipodocumentosController::class, 'index'])->name('tipodocumentos.index')->middleware('auth');
 
+
 Route::get('/clear', function () {
     Artisan::call('cache:clear');
 });
@@ -76,9 +78,13 @@ Route::resource('/Aprendices', AprendicesController::class)->middleware('auth');
 Route::resource('/Bitacoras', BitacoraController::class)->middleware('auth');
 Route::get('/Bitacora/{id}/download', [BitacoraController::class, 'download'] )->name('bitacora.download')->middleware('auth');
 
+
 Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->middleware('auth');
 
 
+//Ruta resource para ente conformadores donde contendrá los métodos CRUD
+
+Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
 
 
 

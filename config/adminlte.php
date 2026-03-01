@@ -343,6 +343,11 @@ return [
                     'url' => '/Bitacoras',
                     'icon' => 'far fa-file-pdf',
                 ],
+                [
+                    'text' => 'Entecoformadores',
+                    'url' => '/Entecoformadores',
+                    'icon' => 'fas fa-user',
+                ],
             ],
         ],
         ['header' => 'account_settings'],

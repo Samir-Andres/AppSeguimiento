@@ -25,5 +25,9 @@ class tipodocumentos extends Model
     public function instructor(){
         return $this->hasMany(instructor::class, 'tbl_instructor', 'NIS');
     }
-    
+
+    public function entecoformador(){
+        return $this->hasMany(entecoformadores::class, 'tbl_ente_coformadores', 'NIS');
+    }
+
 }

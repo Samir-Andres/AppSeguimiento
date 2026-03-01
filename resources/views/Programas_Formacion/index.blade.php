@@ -60,7 +60,7 @@
                     <th scope="col" class="px-6 py-3">NIS</th>
                     <th scope="col" class="px-6 py-3">Código</th>
                     <th scope="col" class="px-6 py-3">Denominación</th>
-                    <th scope="col" class="px-6 py-3">Observacaiones</th>
+                    <th scope="col" class="px-6 py-3">Observaciones</th>
                     <th scope="col" class="px-6 py-3">Acción</th>
                 </tr>
                 </thead>

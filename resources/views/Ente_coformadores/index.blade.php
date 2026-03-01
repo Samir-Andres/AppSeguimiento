@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Eps')
+@section('title', 'Entecoformadores')
 
 
 @section('content_header')
@@ -18,76 +18,106 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Eps</a>
+        <a class="text-indigo-500">Entecoformadores</a>
 
     </div>
 
+    <div class="relative isolate flex items-center gap-x-6 overflow-hidden px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+        <div aria-hidden="true" class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl">
+            <div style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)" class="aspect-577/310 w-144.25 bg-linear-to-r from-[#ff80b5] to-[#9089fc] opacity-30"></div>
+        </div>
+        <div aria-hidden="true" class="absolute top-1/2 left-[max(45rem,calc(50%+8rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl">
+            <div style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)" class="aspect-577/310 w-144.25 bg-linear-to-r from-[#ff80b5] to-[#9089fc] opacity-30"></div>
+        </div>
 
-    <div class="relative isolate flex items-center gap-x-6 overflow-hidden  px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
-        <div aria-hidden="true"
-             class="absolute top-1/2 left-[max(-7rem,calc(50%-52rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl">
-            <div style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"
-                 class="aspect-577/310 w-144.25 bg-linear-to-r from-[#ff80b5] to-[#9089fc] opacity-30"></div>
-        </div>
-        <div aria-hidden="true"
-             class="absolute top-1/2 left-[max(45rem,calc(50%+8rem))] -z-10 -translate-y-1/2 transform-gpu blur-2xl">
-            <div style="clip-path: polygon(74.8% 41.9%, 97.2% 73.2%, 100% 34.9%, 92.5% 0.4%, 87.5% 0%, 75% 28.6%, 58.5% 54.6%, 50.1% 56.8%, 46.9% 44%, 48.3% 17.4%, 24.7% 53.9%, 0% 27.9%, 11.9% 74.2%, 24.9% 54.1%, 68.6% 100%, 74.8% 41.9%)"
-                 class="aspect-577/310 w-144.25 bg-linear-to-r from-[#ff80b5] to-[#9089fc] opacity-30"></div>
-        </div>
-        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Centro de registro </strong>Puedes registrar EPS
-            </p>
-            <a href="{{route('eps.create')}}"
-               class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i></a>
-        </div>
-        <div class="flex flex-1 justify-end">
+        <div class="flex items-center gap-x-4">
+            <div class="text-sm text-gray-900 text-justify md:text-left leading-relaxed">
+                <strong class="font-semibold uppercase">Bienvenidos al centro de ente conformadores,</strong>
+                <span>puedes crear eliminar y actualizar</span>
 
+                <a href="{{route('Entecoformadores.create')}}"
+                   class="inline-flex items-center ml-2 rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 whitespace-nowrap">
+                    Crear <i class="fas fa-plus-circle ml-2"></i>
+                </a>
+            </div>
         </div>
+
+        <div class="flex flex-1 justify-end"></div>
     </div>
-
 
 @stop
 
 @section('content')
 
+
+
     <div class="relative overflow-x-auto sm:overflow-visible shadow-md sm:rounded-lg">
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-left text-gray-500" id="tabla_alternativas">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+
                 <tr>
                     <th scope="col" class="px-6 py-3">NIS</th>
-                    <th scope="col" class="px-6 py-3">Código</th>
-                    <th scope="col" class="px-6 py-3">Denominación</th>
-                    <th scope="col" class="px-6 py-3">Observaciones</th>
-                    <th scope="col" class="px-6 py-3">Acción</th>
+                    <th scope="col" class="px-6 py-3">Tipo de documentos</th>
+                    <th scope="col" class="px-6 py-3">N. Documento</th>
+                    <th scope="col" class="px-6 py-3">Razón social</th>
+                    <th scope="col" class="px-6 py-3">Dirección</th>
+                    <th scope="col" class="px-6 py-3">Teléfono</th>
+                    <th scope="col" class="px-6 py-3">Correo_Institucional</th>
+                    <th scope="col" class="px-6 py-3">ACCIÓN</th>
+
                 </tr>
                 </thead>
                 <tbody>
 
-                @forelse ($eps as $item)
-
+                @forelse ($ente as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
                         <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                             {{ $item->NIS }}
                         </td>
+
+                        <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
+
+                            @switch($item->tbl_tipo_documentos_NIS )
+                                @case(1)
+                                    TI
+                                    @break
+                                @case(2)
+                                    CC
+                                    @break
+                                @case(3)
+                                    CE
+                                    @break
+                                @default
+                                    Otro
+                            @endswitch
+
+                        </td>
+
                         <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                             {{ $item->Numdoc }}
                         </td>
-                        <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->Denominacion }}
-                        </td>
-                        <td class="px-6 py-3 whitespace-nowrap">
 
-                            @if ($item->Observaciones)
-                                <span class="text-gray-900 font-medium">{{ $item->Observaciones }}</span>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            <span class="text-gray-900 font-medium">{{$item->Razon_Social}}</span>
+                        </td>
+
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            @if ($item->Direccion)
+                                <span class="text-gray-900 font-medium">{{$item->Direccion}}</span>
                             @else
-                                <span class="text-gray-400 italic">No tiene información</span>
+                                <span class="text-gray-400 italic">No tiene dirección</span>
                             @endif
 
                         </td>
 
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            <span class="text-gray-900 font-medium">{{$item->Telefono}}</span>
+                        </td>
 
+                        <td class="px-6 py-3 whitespace-nowrap">
+                                <span class="text-gray-900 font-medium">{{$item->Correo_Institucional}}</span>
+                        </td>
 
                         <td class="px-10 py-3">
                             <div class="dropdown">
@@ -99,22 +129,21 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                    <a href="{{route('eps.show', $item->NIS)}}"
+                                    <a href="{{route('Entecoformadores.show', $item->NIS)}}"
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-eye w-5"></i> Ver
                                     </a>
 
-                                    <a href="{{ route('eps.edit', $item->NIS) }}"
+                                    <a href="{{route('Entecoformadores.edit', $item->NIS)}}"
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                     </a>
 
                                     <div class="my-1 border-t border-gray-100"></div>
 
-                                    <form action="{{ route('eps.delete', $item->NIS) }}" method="POST"
+                                    <form action="{{route('Entecoformadores.destroy', $item->NIS)}}" method="POST"
                                           class="form-eliminar">
                                         @csrf
-
                                         @method('DELETE')
                                         <button type="submit"
                                                 class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md w-full text-left transition-colors duration-150">
@@ -126,11 +155,12 @@
                             </div>
                         </td>
 
+
                     </tr>
 
                 @empty
                     <tr class="bg-white border-b">
-                        <td colspan="7" class="px-6 py-10 text-center text-gray-500">
+                        <td colspan="8" class="px-6 py-10 text-center text-gray-500">
                             No hay registros disponibles.
                         </td>
                     </tr>
@@ -139,13 +169,18 @@
 
             </table>
         </div>
+
+
     </div>
 
-    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
+    <div class="mt-4">
+        {{ $ente->links() }}
     </div>
-
 
 @endsection
+
+<div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
+</div>
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">

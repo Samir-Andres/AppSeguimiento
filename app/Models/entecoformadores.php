@@ -8,18 +8,22 @@ class entecoformadores extends Model
 {
     protected $table = 'tbl_ente_coformadores';
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'NIS';
 
-    public $incrementing = false;
+    public $incrementing = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'NIS',
-        'Tdoc',
+        'tbl_tipo_documentos_NIS',
         'Numdoc',
         'Razon_Social',
         'Direccion',
         'Telefono',
         'Correo_Institucional'
     ];
-    
+
+    public function tbl_tipodocumento(){
+        return $this->belongsTo(tipodocumentos::class,'tbl_tipo_documentos_NIS',);
+    }
 }

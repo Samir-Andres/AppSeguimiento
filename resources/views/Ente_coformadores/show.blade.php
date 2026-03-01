@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalle del Aprendiz')
+@section('title', 'Detalle del ente')
 
 
 
@@ -21,21 +21,19 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a href="{{ route('Aprendices.index') }}">Aprendices</a>
+        <a href="{{ route('Entecoformadores.index') }}">Ente</a>
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Detalle del aprendiz</a>
+        <a class="text-indigo-500">Detalles del ente</a>
 
     </div>
 
 @endsection
 
 @section('content')
-
-
     <div class="flex flex-col items-center pt-10 px-2">
 
         <div class="text-center mb-8">
@@ -46,97 +44,63 @@
 
         <div class="w-full max-w-xl bg-white border border-gray-200 rounded-lg shadow-sm">
             <div class="p-4">
-                <h3 class="text-center mb-3">Registro del aprendiz <span class="uppercase">{{$aprendiz->Nombres}}</span> </h3>
+                <h3 class="text-center mb-3">Registro del ente <span class="uppercase">{{$ente->Nombres}}</span></h3>
                 <hr class="mb-3">
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    <div class="mb-1">
+                    <div class="mb-1 text-center md:text-left">
                         <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Tipo Documento</label>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            {{$aprendiz->tipos_documentos->Denominacion}}
+                            {{$ente->tbl_tipodocumento->Denominacion}}
                         </p>
                     </div>
 
-                    <div class="mb-1">
+                    <div class="mb-1 text-center md:text-left">
                         <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">N. Documento</label>
                         <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $aprendiz->Numdoc}}
+                            {{ $ente->Numdoc}}
                         </p>
                     </div>
 
-                    <div class="mb-1">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Nombre</label>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $aprendiz->Nombres}}
-                        </p>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Apellidos</label>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $aprendiz->Apellidos}}
-                        </p>
-                    </div>
-
-                    <div class="mb-1">
+                    <div class="mb-1 text-center md:text-left">
                         <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Institucional</label>
                         <p class="text-gray-600 text-sm leading-relaxed break-all">
-                            {{ $aprendiz->Correo_Institucional}}
-                        </p>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Correo Personal</label>
-                        <p class="text-gray-600 text-sm leading-relaxed break-all">
-                            {{ $aprendiz->Correo_Personal}}
-                        </p>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Eps</label>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $aprendiz->eps->Denominacion}}
-                        </p>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Ficha de caracterización</label>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $aprendiz->ficha_caracterizacion->Denominacion}}
+                            {{ $ente->Correo_Institucional}}
                         </p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-4 pt-4 border-t border-gray-100">
-                    <div class="mb-6">
+                <div class="grid grid-cols-1 gap-4 pt-4 mt-4 border-t border-gray-100 text-center">
+                    <div class="mb-4">
                         <label class="block text-[11px] font-bold text-gray-600 uppercase tracking-wider mb-1">ID Registro del sistema</label>
-                        <p class="text-sm font-mono text-gray-500">{{ $aprendiz->NIS }}</p>
+                        <p class="text-sm font-mono text-gray-500">{{ $ente->NIS }}</p>
                     </div>
                 </div>
 
                 <div class="bg-gray-50 px-4 py-4 rounded-b-lg border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-3">
-            <span class="text-xs text-gray-500 break-all w-full md:w-auto text-left">
+            <span class="text-xs text-gray-500 break-all text-center md:text-left">
                 <i class="fas fa-at mx-1"></i>
-                <span class="text-blue-600">{{$aprendiz->Correo_Personal}}</span>
+                <span class="text-blue-600">{{$ente->Correo_Institucional}}</span>
             </span>
-                    <a href="{{ route('Aprendices.index') }}" class="text-xs font-semibold text-blue-600 hover:underline shrink-0">
+                    <a href="{{ route('Entecoformadores.index') }}" class="text-xs font-semibold text-blue-600 hover:underline">
                         Regresar
                     </a>
                 </div>
             </div>
         </div>
 
+
         @endsection
 
-@section('css')
+        @section('css')
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
-@endsection
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+            <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+        @endsection
 
-@section('js')
-    <script src="https://cdn.tailwindcss.com"></script>
+        @section('js')
+            <script src="https://cdn.tailwindcss.com"></script>
 
 @endsection
 
