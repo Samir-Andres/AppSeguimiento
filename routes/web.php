@@ -63,8 +63,7 @@ Route::delete('/Eps/Delete/{NIS}', [EpsController::class, 'destroy'])->name('eps
 
 
 // Ruta al index de Roles administrativos
-Route::get('/Roles/index', [RolesadministrativosController::class, 'index'])->name('roles.index')->middleware('auth');
-
+Route::resource('/Rolesadministrativos', RolesadministrativosController::class)->middleware('auth');
 // Ruta al index de Tipo de documentos
 Route::get('/Tipo/Documentos/index', [TipodocumentosController::class, 'index'])->name('tipodocumentos.index')->middleware('auth');
 

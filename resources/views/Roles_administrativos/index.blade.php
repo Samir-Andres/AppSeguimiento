@@ -35,7 +35,7 @@
                 <strong class="font-semibold uppercase">Bienvenidos al centro de Roles Administrativos,</strong>
                 <span>puedes crear eliminar y actualizar</span>
 
-                <a href="{{route('Entecoformadores.create')}}"
+                <a href="{{route('Rolesadministrativos.create')}}"
                    class="inline-flex items-center ml-2 rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 whitespace-nowrap">
                     Crear <i class="fas fa-plus-circle ml-2"></i>
                 </a>
@@ -59,6 +59,7 @@
 
                 <tr>
                         <th scope="col" class="px-6 py-3">NIS</th>
+                        <th scope="col" class="px-6 py-3">Nombre</th>
                         <th scope="col" class="px-6 py-3">Descripción</th>
                         <th scope="col" class="px-6 py-3">ACCION</th>
 
@@ -71,9 +72,14 @@
                             <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
                                 {{ $item->NIS }}
                             </td>
+
                             <td class="px-6 py-3 whitespace-nowrap">
-                                @if ($item->Descripcion)
-                                    <span class="text-gray-900 font-medium">{{$item->Descripcion}}</span>
+                                    <span class="text-gray-900 font-medium">{{$item->nombre}}</span>
+                            </td>
+
+                            <td class="px-6 py-3 whitespace-nowrap">
+                                @if ($item->descripcion)
+                                    <span class="text-gray-900 font-medium">{{$item->descripcion}}</span>
                                 @else
                                     <span class="text-gray-400 italic">No tiene descripción</span>
                                 @endif
@@ -90,19 +96,19 @@
                                     <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                        <a href=""
+                                        <a href="{{route('Rolesadministrativos.show', $item->NIS)}}"
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                             <i class="fa-solid fa-eye w-5"></i> Ver
                                         </a>
 
-                                        <a href=""
+                                        <a href="{{route('Rolesadministrativos.edit', $item->NIS)}}"
                                            class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                             <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                         </a>
 
                                         <div class="my-1 border-t border-gray-100"></div>
 
-                                        <form action="" method="POST"
+                                        <form action="{{route('Rolesadministrativos.destroy', $item->NIS)}}" method="POST"
                                               class="form-eliminar">
                                             @csrf
                                             @method('DELETE')
@@ -145,8 +151,8 @@
 
     @section('css')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+        <link rel="stylesheet" href="{{asset('css/parpadeo.css')}} ">
     @endsection
 
     @section('js')
@@ -154,6 +160,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="{{ asset('js/alerts.js') }}"></script>
         <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
+
 
     @endsection
 

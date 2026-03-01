@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class rolesadministrativos extends Model
 {
     protected $table = 'tbl_roles_administrativos';
-
     protected $primaryKey = 'NIS';
-
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'NIS',
-        'Descripcion'
+        'nombre',
+        'descripcion'
     ];
 
 

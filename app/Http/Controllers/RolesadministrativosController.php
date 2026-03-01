@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\entecoformadores;
 use App\Models\rolesadministrativos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RolesadministrativosController extends Controller
 {
@@ -22,7 +24,7 @@ class RolesadministrativosController extends Controller
      */
     public function create()
     {
-        //
+        return view('Roles_administrativos.create');
     }
 
     /**
@@ -30,23 +32,53 @@ class RolesadministrativosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(rolesadministrativos $rolesadministrativos)
+        $request->validate([
+            'nombre' => 'required|string|max:50|min:5|regex:/^[a-zA-Z\s]+$/u',
+            'descripcion' => 'nullable|string|max:100|min:5|regex:/^[a-zA-Z\s]+$/u',
+
+        ],
+        [
+            'nombre.required' => 'El campo nombre es obligatorio',
+            'nombre.max' => 'El campo nombre no puede superar los 50 caracteres',
+            'nombre.regex' => 'El campo nombre debe ser una cadena de texto',
+            'nombre.min' => 'El campo nombre debe tener mínimo 5 caracteres',
+
+            'descripcion.regex' => 'El campo descripción debe ser una cadena de texto',
+            'descripcion.max' => 'El campo descripción no puede superar los 100 caracteres',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $rol = rolesadministrativos::create($request->all());
+            DB::commit();
+
+            return back()->with('success', 'El rol se ha creado correctamente');
+
+        }catch (\Exception $e){
+            DB::rollBack();
+
+            return $e->getMessage();
+        }
+
+
+    }
+    public function show($NIS)
     {
-        //
+        $rol = rolesadministrativos::findOrFail($NIS);
+        return view('Roles_administrativos.show', compact('rol'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(rolesadministrativos $rolesadministrativos)
+    public function edit($NIS)
     {
-        //
+        $rol = entecoformadores::findOrFail($NIS);
+
+        return view('Roles_administrativos.edit', compact('rol'));
     }
 
     /**
