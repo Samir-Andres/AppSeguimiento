@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear aprendiz')
+@section('title', 'Registrar instructor')
 
 
 @section('content_header')
@@ -17,14 +17,14 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a href="{{route('Aprendices.index')}}" >Aprendices</a>
+        <a href="{{route('Instructores.index')}}" >Instructores</a>
 
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Registra aprendiz</a>
+        <a class="text-indigo-500">Registra instructores</a>
 
     </div>
 
@@ -42,28 +42,25 @@
 
             <div class="p-2">
                 <h1 class="text-3xl font-semibold text-gray-900 text-center md:text-start mb-3 tracking-tight">
-                    Registro de aprendices
+                    Registro de instructores
                 </h1>
                 <p class="text-sm/6 text-gray-600 text-center md:text-start mx-auto md:mx-0 mb-8 leading-relaxed max-w-[400px]">
                     Complete la información técnica y personal detallada en el sistema.
                 </p>
 
-                <form method="POST" action="{{route('Aprendices.store')}}">
+                <form method="POST" action="{{route('Instructores.store')}}">
                     @csrf
-
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
 
-
-
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Tipo documento</label>
-                            <select name="tbl_tipo_documentos_NIS" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
+                            <select name="tbl_tipo_documentos_NIS" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500" >
                                 <option value="">Selecciona una tipo...</option>
 
                                 @foreach ($documento as $item)
                                     <option value="{{ $item->NIS }}"
-                                        {{ old('NIS') == $item->NIS ? 'selected' : '' }}>
+                                        {{ old('tbl_tipo_documentos_NIS') == $item->NIS ? 'selected' : '' }}>
                                         {{ $item->Denominacion }}
                                     </option>
                                 @endforeach
@@ -109,16 +106,8 @@
 
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Teléfono</label>
-                            <input type="number" name="Telefono" placeholder="300..." class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors" value="{{ old('Telefono') }}" />
+                            <input type="text" name="Telefono" placeholder="300..." class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors" value="{{ old('Telefono') }}" />
                             @error('Telefono')
-                            <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">F. Nacimiento</label>
-                            <input type="date" name="FechaNac" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors text-gray-500" value="{{ old('FechaNac') }}" />
-                            @error('FechaNac')
                             <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
                             @enderror
                         </div>
@@ -143,7 +132,7 @@
 
                         <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Sexo</label>
-                            <select name="Sexo" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
+                            <select name="Sexo"   class="w-full px-3 py-2.5 border border-gray-200 rounded-xl  text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
                                 <option value="">Seleccione</option>
                                 <option value="0">Femenino</option>
                                 <option value="1">Masculino</option>
@@ -154,13 +143,21 @@
                         </div>
 
                         <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Fecha de nacimiento</label>
+                            <input type="date" name="FechaNac" placeholder="@gmail.com" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors" value="{{ old('FechaNac') }}" />
+                            @error('FechaNac')
+                            <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
                             <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Ref. EPS</label>
                             <select name="tbl_eps_NIS" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
-                            <option value="">Selecciona una eps...</option>
+                                <option value="">Selecciona una eps...</option>
 
                                 @foreach ($eps as $item)
                                     <option value="{{ $item->NIS }}"
-                                        {{ old('NIS') == $item->NIS ? 'selected' : '' }}>
+                                        {{ old('tbl_eps_NIS') == $item->NIS ? 'selected' : '' }}>
                                         {{ $item->Denominacion }}
                                     </option>
                                 @endforeach
@@ -173,30 +170,11 @@
 
                         </div>
 
-
-                        <div>
-                            <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Ref. Ficha</label>
-                            <select name="tbl_ficha_caracterizacion_NIS" class="w-full px-3 py-2.5 border border-gray-200 rounded-xl text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
-                                <option value="">Selecciona una ficha...</option>
-                                @foreach ($ficha as $item)
-                                    <option value="{{ $item->NIS }}"
-                                        {{ old('NIS') == $item->NIS ? 'selected' : '' }}>
-                                        {{ $item->Denominacion }}
-                                    </option>
-                                @endforeach
-
-                            </select>
-                            @error('tbl_ficha_caracterizacion_NIS')
-                            <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>
-                            @enderror
-
-                        </div>
-
                         <div class="flex justify-center items-center w-full mt-0">
 
 
                             <button type="submit"
-                                    class="flex items-center justify-center gap-2 mt-6 bg-indigo-500 hover:bg-indigo-600 text-white py-2.5 w-full rounded-full transition shadow-lg shadow-indigo-200">
+                                    class="flex items-center justify-center gap-1 mt-3 bg-indigo-500 hover:bg-indigo-600 text-white py-2.5 w-full rounded-full transition shadow-lg shadow-indigo-200">
                                 Crear Registro
                                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -209,7 +187,9 @@
 
                 </form>
             </div>
-            </div>
+        </div>
+
+
 
     </section>
 

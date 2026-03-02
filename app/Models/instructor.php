@@ -12,6 +12,8 @@ class instructor extends Model
 
     public $incrementing = false;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'NIS',
         'Numdoc',
@@ -39,6 +41,12 @@ class instructor extends Model
 
     public function roles_administrativos(){
         return $this->belongsTo(rolesadministrativos::class, 'tbl_roles_administrativos_NIS');
+    }
+
+    public  function  ficha_caractetizacion_Nis()
+    {
+        return $this->hasMany(fichacaracterizacion::class, 'tbl_ficha_caracterizacion', 'NIS');
+
     }
 
 

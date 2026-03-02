@@ -21,7 +21,8 @@ class fichacaracterizacion extends Model
         'Fecha_Fin',
         'Observacaiones',
         'tbl_centro_formacion_NIS',
-        'tbl_programas_formacion_NIS'
+        'tbl_programas_formacion_NIS',
+        'tbl_instructor_NIS'
     ];
 
 
@@ -31,12 +32,15 @@ class fichacaracterizacion extends Model
 
     public function centro_formacion(){
         return $this->belongsTo(centroformacion::class, 'tbl_centro_formacion_NIS');
-        
+
     }
     public function programa_formacion(){
         return $this->belongsTo(programaformacion::class, 'tbl_programas_formacion_NIS');
 
     }
+    public function instructores(){
+        return $this->belongsTo(instructor::class, 'tbl_instructor_NIS');
+    }
 
-    
+
 }

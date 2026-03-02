@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EpsController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\EntecoformadoresController;
+use App\Http\Controllers\InstructorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -82,9 +83,8 @@ Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->mid
 
 
 //Ruta resource para ente conformadores donde contendrá los métodos CRUD
-
 Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
-
+Route::resource('/Instructores', InstructorController::class)->middleware('auth');
 
 
 

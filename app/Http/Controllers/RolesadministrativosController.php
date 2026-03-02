@@ -61,7 +61,7 @@ class RolesadministrativosController extends Controller
         }catch (\Exception $e){
             DB::rollBack();
 
-            return $e->getMessage();
+            return back()->with('error', 'No se ha podido crear el rol');
         }
 
 

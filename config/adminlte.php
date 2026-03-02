@@ -334,6 +334,11 @@ return [
                     'icon' => 'fas fa-id-card',
                 ],
                 [
+                    'text' => 'Instructores',
+                    'url' => '/Instructores',
+                    'icon' => 'fas fa-chalkboard-teacher',
+                ],
+                [
                     'text' => 'Aprendices',
                     'url' => '/Aprendices',
                     'icon' => 'fas fa-user-graduate',
