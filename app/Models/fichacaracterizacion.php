@@ -10,7 +10,8 @@ class fichacaracterizacion extends Model
 
     protected $primaryKey = 'NIS';
 
-    public $incrementing = false;
+    public $incrementing = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'NIS',

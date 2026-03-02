@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class instructor extends Model
 {
+
+    use Notifiable;
     protected $table = 'tbl_instructor';
 
     protected $primaryKey = 'NIS';
@@ -47,6 +50,11 @@ class instructor extends Model
     {
         return $this->hasMany(fichacaracterizacion::class, 'tbl_ficha_caracterizacion', 'NIS');
 
+    }
+
+    public  function routeNotificationForMail($notification){
+
+        return $this->Correo_Institucional;
     }
 
 

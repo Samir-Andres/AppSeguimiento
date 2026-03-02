@@ -349,6 +349,11 @@ return [
                     'icon' => 'far fa-file-pdf',
                 ],
                 [
+                    'text' => 'Ficha Caracterización',
+                    'url' => '/Ficha_caracterizacion',
+                    'icon' => 'far fa-folder',
+                ],
+                [
                     'text' => 'Entecoformadores',
                     'url' => '/Entecoformadores',
                     'icon' => 'fas fa-user',
