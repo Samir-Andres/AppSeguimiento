@@ -65,5 +65,11 @@ class User extends Authenticatable
 
 
     }
+
+    public function aprendiz()
+    {
+        return $this->hasOne(aprendices::class);
+    }
+
 }
 

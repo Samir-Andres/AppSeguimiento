@@ -20,7 +20,6 @@
             <div class="fl-flex-label col-12 col-lg-6 mb-4">
                 <input type="text" class="input input__text" placeholder="Nombres" name="nombre"
                        value="{{ $usuario->name }}">
-
                 <div class="mt-3">
                     @error('name')
                     <small class="text-danger mt-2">{{ $message }} <i class="fas fa-info"></i> </small>
@@ -45,6 +44,9 @@
             </div>
         </div>
     </form>
+
+
+
 
 
 

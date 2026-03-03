@@ -47,6 +47,11 @@
             <div class="flex justify-between items-center text-sm">
                 <span class="text-gray-400">Fecha de registro</span>
                 <span class="font-medium text-gray-700">{{ $user->created_at->translatedFormat('d \d\e F \d\e Y') }}</span>
+                <span class="font-medium text-gray-700">{{ $user->updated_at->translatedFormat('d \d\e F \d\e Y') }}</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-400">Fecha de actualización</span>
+                <span class="font-medium text-gray-700">{{ $user->updated_at->format('H:i:s') }}</span>
             </div>
 
             <div class="flex justify-between items-center text-sm">
@@ -84,11 +89,9 @@
         @csrf
 
         <div class="w-full px-4 mb-8">
-            <!-- Título Principal con estilo moderno -->
             <h1 class="text-center text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">
                 Actualizar Perfil
             </h1>
-            <!-- Línea decorativa sutil bajo el título -->
             <div class="mt-2 mx-auto w-16 h-1 bg-indigo-500 rounded-full"></div>
             <p class="text-center text-slate-500 text-sm mt-2">Gestiona la información de tu cuenta</p>
         </div>
@@ -131,6 +134,82 @@
     </form>
 
 
+
+    <div class="max-w-4xl mx-auto my-10 bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <!-- Encabezado del Perfil -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-10 text-white text-center">
+            <div class="w-24 h-24 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center backdrop-blur-sm border-2 border-white/30">
+                <span class="text-3xl font-bold uppercase">{{ substr($aprendiz->Nombres, 0, 1) }}{{ substr($aprendiz->Apellidos, 0, 1) }}</span>
+            </div>
+            <h1 class="text-3xl font-extrabold tracking-tight">{{ $aprendiz->Nombres }} {{ $aprendiz->Apellidos }}</h1>
+            <p class="text-blue-100 opacity-90 mt-1">NIS: {{ $aprendiz->NIS }}</p>
+        </div>
+
+        <!-- Cuerpo de la Información -->
+        <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Columna 1: Información Personal -->
+                <div class="space-y-4">
+                    <h2 class="text-sm font-bold text-indigo-600 uppercase tracking-wider border-b pb-2">Datos Personales</h2>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Documento</span>
+                        <span class="text-gray-700 font-medium">{{ $aprendiz->Numdoc }}</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Fecha de Nacimiento</span>
+                        <span class="text-gray-700 font-medium">{{ \Carbon\Carbon::parse($aprendiz->FechaNac)->format('d/m/Y') }}</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Sexo</span>
+                        <span class="text-gray-700 font-medium">{{ $aprendiz->Sexo == 1 ? 'Masculino' : 'Femenino' }}</span>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Contacto y Ubicación -->
+                <div class="space-y-4">
+                    <h2 class="text-sm font-bold text-indigo-600 uppercase tracking-wider border-b pb-2">Contacto y Ubicación</h2>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Teléfono</span>
+                        <span class="text-gray-700 font-medium">{{ $aprendiz->Telefono }}</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Dirección</span>
+                        <span class="text-gray-700 font-medium">{{ $aprendiz->Direccion }}</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Correo Institucional</span>
+                        <span class="text-blue-600 font-medium truncate">{{ $aprendiz->Correo_Institucional }}</span>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <span class="text-xs text-gray-400 font-semibold uppercase">Correo Personal</span>
+                        <span class="text-gray-700 font-medium truncate">{{ $aprendiz->Correo_Personal }}</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mt-10 pt-6 border-t border-gray-100">
+                <div class="bg-gray-50 rounded-xl p-4 flex flex-wrap gap-6 justify-around">
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 font-bold uppercase">EPS</span>
+                        <span class="text-sm font-semibold text-gray-600">Ref: {{ $aprendiz->tbl_eps_NIS }}</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-xs text-gray-400 font-bold uppercase">Ficha</span>
+                        <span class="text-sm font-semibold text-gray-600">#{{ $aprendiz->tbl_ficha_caracterizacion_NIS }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

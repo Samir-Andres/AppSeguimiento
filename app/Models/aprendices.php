@@ -27,7 +27,8 @@ class aprendices extends Model
         'Sexo',
         'FechaNac',
         'tbl_eps_NIS',
-        'tbl_ficha_caracterizacion_NIS'
+        'tbl_ficha_caracterizacion_NIS',
+        'users_id'
     ];
 
 
@@ -40,10 +41,14 @@ class aprendices extends Model
     {
         return $this->belongsTo(eps::class, 'tbl_eps_NIS');
     }
-    public function ficha_caracterizacion()
+        public function ficha_caracterizacion()
     {
         return $this->belongsTo(fichacaracterizacion::class, 'tbl_ficha_caracterizacion_NIS');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
 
 }

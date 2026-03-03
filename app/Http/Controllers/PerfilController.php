@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\aprendices;
 use Illuminate\Database\QueryException;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,8 +17,12 @@ class PerfilController extends Controller
     public function index()
     {
 
-        $usuario = User::where('id', Auth::user()->id)->firstOrFail();
-        return view('perfil.perfil', compact('usuario'));
+        $usuario = Auth::user();
+
+        $aprendiz = aprendices::where('users_id', $usuario->id)->first();
+
+
+        return view('perfil.perfil', compact('usuario', 'aprendiz'));
     }
 
     /**
