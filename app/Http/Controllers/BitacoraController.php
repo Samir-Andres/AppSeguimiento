@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\alternativa;
+use App\Models\aprendices;
 use App\Models\bitacora;
 use App\Notifications\BitacoraEmail;
+use App\Notifications\SeguimientoBitacoraEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +55,7 @@ class BitacoraController extends Controller
 
         try {
 
-            bitacora::create([
+          $bitacora =  bitacora::create([
                 'file' => 'Documentos/bitacoras/' . $documento,
                 'users_id' => Auth::id(),
             ]);
@@ -61,11 +63,22 @@ class BitacoraController extends Controller
             $user = Auth::user();
             $user->notify(new BitacoraEmail($user->name, $user->email, $user->created_at));
 
+            $aprendiz = aprendices::where('users_id', Auth::id())->first();
+
+            if($aprendiz && $aprendiz->ficha_caracterizacion && $aprendiz->ficha_caracterizacion->instructores){
+
+                $intructor = $aprendiz->ficha_caracterizacion->instructores;
+
+                $intructor->notify( new SeguimientoBitacoraEmail($aprendiz, $bitacora ));
+
+            }
+
+
             DB::commit();
             return redirect()->route('Bitacoras.index')->with('success', 'La bitácora ha sido creada correctamente');
         }catch (\Exception $e){
             DB::rollBack();
-            return back()->with('error', 'Error al cargar bitácora');
+            return $e->getMessage();
         }
 
 

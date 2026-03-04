@@ -60,6 +60,7 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">ID del sistema</th>
                         <th scope="col" class="px-6 py-3">Archivo</th>
+                        <th scope="col" class="px-6 py-3">Estado</th>
                         <th scope="col" class="px-6 py-3">Aprendiz</th>
                         <th scope="col" class="px-6 py-3">Hora de creación</th>
                         <th scope="col" class="px-6 py-3">Hora de actualización</th>
@@ -90,6 +91,19 @@
                                 @else
                                     <span class="text-gray-400 italic">No tiene usuario</span>
                                 @endif
+
+                            </td>
+
+                            <td class="px-6 py-3 whitespace-nowrap">
+
+                                @if ($item->estado === 'Creada')
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">{{$item->estado}}</span>
+                                @elseif($item->estado === 'Aprobada')
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-800 text-white italic">{{$item->estado}}</span>
+                                @elseif($item->estado === 'Rechazada')
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-200 text-black">{{$item->estado}}</span>
+                                @endif
+
 
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap">

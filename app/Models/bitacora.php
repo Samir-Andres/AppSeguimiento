@@ -13,9 +13,10 @@ class bitacora extends Model
     public $timestamps  = true;
 
     protected $fillable = [
+        'id',
         'file',
+        'estado',
         'users_id'
-
     ];
 
     public function Usuarios(){
