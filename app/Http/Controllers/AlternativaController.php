@@ -194,4 +194,6 @@ class AlternativaController extends Controller
             return back()->with('error', 'Error al eliminar');
         }
     }
+
+
 }

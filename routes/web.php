@@ -42,6 +42,7 @@ Route::post('/Alternativa/store', [AlternativaController::class, 'store'] )->nam
 Route::get('/Alternativa/Detalle/{id}', [AlternativaController::class, 'show'] )->name('alternativa.show')->middleware('auth');
 Route::get('/Regional/index', [RegionalController::class, 'index'])->name('regional.index');
 Route::get('/Consultar/Regional', [RegionalController::class, 'ConsultarRegional'])->name('consultar.regional');
+Route::get('/buscar', [RegionalController::class, 'buscar'] )->name('buscar.alternativa')->middleware('auth');
 
 
 Route::get('/Programa/index', [ProgramaformacionController::class, 'index'])->name('ProgramaFormacion.index');
@@ -87,8 +88,6 @@ Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->mid
 //Ruta resource para ente conformadores donde contendrá los métodos CRUD
 Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
 Route::resource('/Instructores', InstructorController::class)->middleware('auth');
-
-
 Route::resource('/Ficha_caracterizacion', FichacaracterizacionController::class)->middleware('auth');
 
 

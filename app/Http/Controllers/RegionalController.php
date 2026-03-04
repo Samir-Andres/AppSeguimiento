@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\regional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegionalController extends Controller
 {
@@ -22,7 +23,7 @@ class RegionalController extends Controller
         return view('regional.Consultar');
     }
 
-   
+
     /**
      * Show the form for creating a new resource.
      */
@@ -70,4 +71,43 @@ class RegionalController extends Controller
     {
         //
     }
+
+    public function buscar(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $salida = "";
+
+            $regionales = DB::table("tbl_regional")
+                ->where('Denominacion', 'LIKE', '%' . $request->buscar . '%')
+                ->orwhere('Codigo', 'LIKE', '%' . $request->buscar . '%')
+                ->paginate(10);
+
+            if ($regionales->count() > 0) {
+
+                foreach ($regionales as $regional) {
+
+                    $observacion = !empty(trim($regional->Observaciones))
+                        ? $regional->Observaciones
+                        : "<span class='text-gray-400 italic'>No tiene información</span>";
+
+                    $salida .= "<tr class='bg-white border-b hover:bg-gray-50'>" .
+                        "<td class='px-6 py-3 whitespace-nowrap'' >" . $regional->NIS . "</td>" .
+                        "<td class='px-6 py-3 whitespace-nowrap'>" . $regional->Codigo . "</td>" .
+                        "<td class='px-6 py-3 whitespace-nowrap''>" . $regional->Denominacion . "</td>" .
+                        "<td class='px-6 py-3 whitespace-nowrap'>" . $observacion . "</td>" .
+                        "</tr>";
+                }
+
+            } else {
+
+                $salida .= "<tr>
+                <td colspan='4' class='text-center mt-3 p-4'>No hay resultados</td>
+            </tr>";
+            }
+
+            return response($salida);
+        }
+    }
+
 }
