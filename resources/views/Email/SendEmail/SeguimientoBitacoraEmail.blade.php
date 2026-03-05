@@ -20,7 +20,7 @@
     </div>
     <div class="content">
         <h2>Instructor de seguimientos</h2>
-        <p>Te escribimos para informarte que el aprendiz {{ $aprendiz->Nombres  }} </p>
+        <p>Te escribimos para informarte que el aprendiz {{ $aprendiz->Nombres  }}  a cargado su bitácora en el sistema ya puedes verla</p>
 
         <p>Puedes revisar los detalles presionando el siguiente botón:</p>
 

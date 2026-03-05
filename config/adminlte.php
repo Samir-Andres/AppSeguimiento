@@ -312,6 +312,11 @@ return [
             'url' => '/home',
             'icon' => 'fas fa-home'
         ],
+        [
+            'text' => 'Cargar bitácoras',
+            'url' => '/Bitacoras',
+            'icon' => 'far fa-file-pdf'
+        ],
 
         [
             'text' => 'Registros',
@@ -344,8 +349,8 @@ return [
                     'icon' => 'fas fa-user-graduate',
                 ],
                 [
-                    'text' => 'Bitácoras',
-                    'url' => '/Bitacoras',
+                    'text' => 'Ver Bitácoras',
+                    'url' => '',
                     'icon' => 'far fa-file-pdf',
                 ],
                 [

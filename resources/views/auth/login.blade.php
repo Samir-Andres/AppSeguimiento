@@ -1,7 +1,7 @@
     @extends('layouts.app')
 
-    @section('content')
     @section('title', 'Login')
+    @section('content')
 
 
 
@@ -91,6 +91,12 @@
                 @csrf
 
                 <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">{{ __('Login') }}</h2>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
+
 
                 <!-- Email Address -->
                 <div class="mb-4">
@@ -134,7 +140,7 @@
                     class="w-full mb-4 bg-indigo-500 hover:bg-indigo-600 transition-all active:scale-95 py-2.5 rounded text-white font-medium shadow-md shadow-indigo-200 uppercase tracking-wide">
                     {{ __('Iniciar Sesión') }}
 
-                    
+
                 </button>
 
                 <p class="text-center mt-4 text-xs">
