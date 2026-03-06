@@ -18,7 +18,7 @@ class rolesadministrativos extends Model
     ];
 
 
-    public function instructor(){
-        return $this->hasMany(instructor::class, 'tbl_instructor', 'NIS');
+    public function user(){
+        return $this->hasMany(User::class, 'users');
     }
 }

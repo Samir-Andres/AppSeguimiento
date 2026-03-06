@@ -156,8 +156,9 @@
         <div
             class="relative group flex-grow transition-all w-56 rounded-lg overflow-hidden h-[400px] duration-500 hover:w-full">
             <img class="h-full w-full object-cover object-center"
-                src="https://images.unsplash.com/photo-1585687501004-615dfdfde7f1?q=80&h=800&w=800&auto=format&fit=crop"
+                src="{{asset('img/SGEP.png')}}" title="logo"
                 alt="image">
+
         </div>
     </div>
 
@@ -215,13 +216,16 @@
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-8 md:gap-16">
 
             <div class="lg:col-span-3 space-y-6">
-                <a href="https://prebuiltui.com" class="block">
-                    <svg width="157" height="40" viewBox="0 0 157 40" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m8.75 11.3 6.75 3.884 6.75-3.885M8.75 34.58v-7.755L2 22.939m27 0-6.75 3.885v7.754M2.405 15.408 15.5 22.954l13.095-7.546M15.5 38V22.939M29 28.915V16.962a2.98 2.98 0 0 0-1.5-2.585L17 8.4a3.01 3.01 0 0 0-3 0L3.5 14.377A3 3 0 0 0 2 16.962v11.953A2.98 2.98 0 0 0 3.5 31.5L14 37.477a3.01 3.01 0 0 0 3 0L27.5 31.5a3 3 0 0 0 1.5-2.585"
-                            stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                <a href="" title="ver logo" class="flex items-center gap-2 text-2xl font-bold text-white dark:text-white flex-shrink-0">
+
+                    <img src="{{ asset('img/SGEP.png') }}"
+                         alt="Logo"
+                         class="w-10 h-10 rounded-full object-cover">
+
+
+        App<span class="text-blue-600">Seguimiento</span>
+
+
                 </a>
                 <p class="text-sm md:text-base">Software de gestión de etapa productiva.</p>
                 <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">

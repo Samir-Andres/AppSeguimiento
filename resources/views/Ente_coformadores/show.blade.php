@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('title', 'Detalle del ente')
 
 
@@ -34,7 +34,7 @@
 @endsection
 
 @section('content')
-    <div class="flex flex-col items-center pt-10 px-2">
+    <div class="flex flex-col items-center ">
 
         <div class="text-center mb-8">
             <h1 class="text-2xl font-light text-gray-700 uppercase tracking-wide">Información del Registro</h1>

@@ -88,6 +88,7 @@ Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->mid
 //Ruta resource para ente conformadores donde contendrá los métodos CRUD
 Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
 Route::resource('/Instructores', InstructorController::class)->middleware('auth');
+Route::get('/Ver/Bitacora', [InstructorController::class, 'VerBitacora'])->name('ver.bitacora')->middleware('auth');
 Route::resource('/Ficha_caracterizacion', FichacaracterizacionController::class)->middleware('auth');
 
 

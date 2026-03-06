@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('title', 'Bitácoras')
 
 
@@ -60,8 +60,8 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">ID del sistema</th>
                         <th scope="col" class="px-6 py-3">Archivo</th>
-                        <th scope="col" class="px-6 py-3">Estado</th>
                         <th scope="col" class="px-6 py-3">Aprendiz</th>
+                        <th scope="col" class="px-6 py-3">Estado</th>
                         <th scope="col" class="px-6 py-3">Hora de creación</th>
                         <th scope="col" class="px-6 py-3">Hora de actualización</th>
                         <th scope="col" class="px-6 py-3">Acción</th>

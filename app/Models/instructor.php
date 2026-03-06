@@ -42,9 +42,7 @@ class instructor extends Model
         return $this->belongsTo(eps::class, 'tbl_eps_NIS');
     }
 
-    public function roles_administrativos(){
-        return $this->belongsTo(rolesadministrativos::class, 'tbl_roles_administrativos_NIS');
-    }
+
 
     public  function  ficha_caractetizacion_Nis()
     {
@@ -56,6 +54,13 @@ class instructor extends Model
 
         return $this->Correo_Institucional;
     }
+
+    public function user()
+
+{
+    return $this->hasOne(User::class, 'users_id', 'id');
+
+}
 
 
 }

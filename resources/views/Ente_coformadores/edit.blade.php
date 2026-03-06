@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('title', 'Editar ente coformador')
 
 @section('content_header')

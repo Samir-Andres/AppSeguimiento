@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\aprendices;
+use App\Models\instructor;
 use Illuminate\Database\QueryException;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,12 +18,29 @@ class PerfilController extends Controller
     public function index()
     {
 
-        $usuario = Auth::user();
+       $usuario = Auth::user();
 
-        $aprendiz = aprendices::where('users_id', $usuario->id)->first();
+       $aprendiz = null;
+       $instructor = null;
+       $roles = null;
 
 
-        return view('perfil.perfil', compact('usuario', 'aprendiz'));
+       if ($usuario->aprendiz){
+           $aprendiz = $usuario->aprendiz;
+
+       }
+       if ($usuario->instructor){
+           $instructor = $usuario->instructor;
+
+       }
+       if ($usuario->roles){
+           $roles = $usuario->roles;
+
+       }
+
+
+
+        return view('perfil.perfil', compact('usuario', 'aprendiz', 'instructor', 'roles'));
     }
 
     /**

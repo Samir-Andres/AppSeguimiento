@@ -1,6 +1,6 @@
 @extends('adminlte::page')
-
-@section('title', 'Detalle del Aprendiz')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'Detalle del instructor')
 
 
 
@@ -99,12 +99,7 @@
                         </p>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Rol</label>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            {{ $instructor->roles_administrativos->nombre}}
-                        </p>
-                    </div>
+
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 pt-4 border-t border-gray-100">

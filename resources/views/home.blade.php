@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('content_header')
   <div>
 

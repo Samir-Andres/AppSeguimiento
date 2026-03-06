@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bitacora;
 use App\Models\eps;
 use App\Models\instructor;
 use App\Models\rolesadministrativos;
 use App\Models\tipodocumentos;
+use App\Models\User;
+use App\Notifications\PasswordEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class InstructorController extends Controller
 {
@@ -101,7 +106,10 @@ class InstructorController extends Controller
 
         try {
 
-              instructor::create([
+
+
+
+            $instructor =  instructor::create([
                 'tbl_tipo_documentos_NIS' => $request->tbl_tipo_documentos_NIS,
                 'Numdoc' => $request->Numdoc,
                 'Nombres' => $request->Nombres,
@@ -113,17 +121,29 @@ class InstructorController extends Controller
                 'Sexo' => $request->Sexo,
                 'FechaNac' => $request->FechaNac,
                 'tbl_eps_NIS' => $request->tbl_eps_NIS,
-                'tbl_roles_administrativos_NIS' => 5,
             ]);
+
+            $password = Str::random(8);
+            $passwordEncript = Hash::make($password);
+
+            User::create(
+                [
+                    'name' => $request->Nombres,
+                    'email' => $request->Correo_Institucional,
+                    'password' => $passwordEncript,
+                ]
+            );
 
 
                 DB::commit();
+
+             $instructor->notify(new  PasswordEmail($instructor->Correo_Institucional, $instructor->Nombres, $instructor->pellidos, $password));
 
                 return back()->with('success', 'El instructor se ha registrado correctamente');
 
             } catch (\Exception $e) {
                 DB::rollBack();
-                return back()->with('error', 'Error al registrar el instructor');
+                return back()->with('error', 'Error al registrar el instructor'. $e->getMessage());
             }
         }
 
@@ -268,5 +288,14 @@ class InstructorController extends Controller
             DB::rollBack();
             return back()->with('error', 'Error al eliminar el instructor');
         }
+    }
+
+
+    public function  VerBitacora()
+    {
+
+        $bitacora =  bitacora::where('users_id')->paginate(10);
+        return view('Bitacora.index', compact('bitacora'));
+
     }
 }

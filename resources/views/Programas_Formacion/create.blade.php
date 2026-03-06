@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Programas')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 
 @section('content_header')
     <div class="flex flex-wrap  items-center space-x-2 text-sm text-gray-500 font-medium">

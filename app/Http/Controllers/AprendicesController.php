@@ -97,6 +97,7 @@ class AprendicesController extends Controller
 
         try {
 
+
             $aprendiz = aprendices::create($v->validated());
 
             DB::commit();
@@ -138,6 +139,7 @@ class AprendicesController extends Controller
      */
     public function update(Request $request, $Aprendice)
     {
+
         $atributos = [
             'tbl_tipo_documentos_NIS'       => 'tipo de documento',
             'Numdoc'                        => 'número de documento',
@@ -199,12 +201,12 @@ class AprendicesController extends Controller
             'Apellidos'                     => $request->Apellidos,
             'Direccion'                     => $request->Direccion,
             'Telefono'                      => $request->Telefono,
-           'Correo_Institucional'          =>$request->Correo_Institucional,
-           'Correo_Personal'               =>$request->Correo_Personal,
-           'Sexo'                          => $request->Sexo,
-           'FechaNac'                      => $request->FechaNac,
-           'tbl_eps_NIS'                   => $request->tbl_eps_NIS,
-           'tbl_ficha_caracterizacion_NIS' => $request->tbl_ficha_caracterizacion_NIS,
+            'Correo_Institucional'          =>$request->Correo_Institucional,
+            'Correo_Personal'               =>$request->Correo_Personal,
+            'Sexo'                          => $request->Sexo,
+            'FechaNac'                      => $request->FechaNac,
+            'tbl_eps_NIS'                   => $request->tbl_eps_NIS,
+            'tbl_ficha_caracterizacion_NIS' => $request->tbl_ficha_caracterizacion_NIS,
 
 
            ]);

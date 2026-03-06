@@ -1,6 +1,6 @@
 @extends('adminlte::page')
-
-@section('title', 'Editar rol' . $rol->nombre)
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'Editar rol')
 
 @section('content_header')
 

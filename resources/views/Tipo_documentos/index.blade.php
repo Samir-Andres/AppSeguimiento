@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('title', 'Tipos de documentos')
 
 
@@ -36,7 +36,7 @@
             <p class="text-sm/6 text-gray-900">
                 <strong class="font-semibold uppercase">Centro de registro Tipos de documentos</strong> Puedes registrar programas de formación
             </p>
-            <a href="{{route('Programas.create')}}"
+            <a href=""
                class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i>
             </a>
         </div>
@@ -93,19 +93,19 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                    <a href="{{route('programas.show', $item->NIS)}}"
+                                    <a href=""
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-eye w-5"></i> Ver
                                     </a>
 
-                                    <a href="{{route('Programas.edit', $item->NIS)}}"
+                                    <a href=""
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                     </a>
 
                                     <div class="my-1 border-t border-gray-100"></div>
 
-                                    <form action="{{ route('Programas.destroy', $item->NIS) }}" method="POST"
+                                    <form action="" method="POST"
                                           class="form-eliminar">
                                         @csrf
                                         @method('DELETE')

@@ -1,9 +1,11 @@
 @extends('adminlte::page')
-
-@section('title', 'Programas')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'Bitácoras')
+
 
 @section('content_header')
+
+
     <div class="flex flex-wrap  items-center space-x-2 text-sm text-gray-500 font-medium">
         <a href="{{ route('home') }}" type="button" aria-label="Home" title="Dashboard">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +19,7 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Programas Formación</a>
+        <a class="text-indigo-500">Bitácoras</a>
 
     </div>
 
@@ -34,61 +36,94 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Centro de registro </strong>Puedes registrar programas de formación
+                <strong class="font-semibold uppercase">Bienvenidos al centro de bitácoras,<span span
+                                                                                                 class="text-blue-600"></span> </strong>puedes crear eliminar y actualizar
             </p>
-            <a href="{{route('Programas.create')}}"
-               class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i>
-            </a>
+            <a href="{{route('Bitacoras.create')}}"
+               class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i></a>
         </div>
         <div class="flex flex-1 justify-end">
 
         </div>
     </div>
 
-@endsection
+@stop
 
 @section('content')
 
-    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
-    </div>
+
 
     <div class="relative overflow-x-auto sm:overflow-visible shadow-md sm:rounded-lg">
         <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500">
+            <table class="w-full text-sm text-left text-gray-500" id="tabla_alternativas">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3">NIS</th>
-                    <th scope="col" class="px-6 py-3">Código</th>
-                    <th scope="col" class="px-6 py-3">Denominación</th>
-                    <th scope="col" class="px-6 py-3">Observaciones</th>
+                    <th scope="col" class="px-6 py-3">ID del sistema</th>
+                    <th scope="col" class="px-6 py-3">Archivo</th>
+                    <th scope="col" class="px-6 py-3">Aprendiz</th>
+                    <th scope="col" class="px-6 py-3">Estado</th>
+                    <th scope="col" class="px-6 py-3">Hora de creación</th>
+                    <th scope="col" class="px-6 py-3">Hora de actualización</th>
                     <th scope="col" class="px-6 py-3">Acción</th>
+
                 </tr>
                 </thead>
                 <tbody>
 
-                @forelse ($programaformacion as $programa)
+                @forelse ($bitacora as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="px-6 py-3 font-medium text-gray-900 whitespace-nowrap">
-                            {{ $programa->NIS }}
-                        </td>
+
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $programa->Codigo }}
+                            {{ $item->id}}
+
+
                         </td>
+
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $programa->Denominacion }}
+                            <a href="{{ asset($item->file) }}" target="_blank" title="Ver">
+                                <i class="bi bi-filetype-pdf text-red-500"></i> </a>
                         </td>
+
                         <td class="px-6 py-3 whitespace-nowrap">
 
-                            @if ($programa->Observaciones)
-                                <span class="text-gray-900 font-medium">{{ $programa->Observaciones }}</span>
+                            @if ($item->Usuarios->name)
+                                {{ $item->Usuarios->name }}
                             @else
-                                <span class="text-gray-400 italic">No tiene información</span>
+                                <span class="text-gray-400 italic">No tiene usuario</span>
                             @endif
 
                         </td>
+
+                        <td class="px-6 py-3 whitespace-nowrap">
+
+                            @if ($item->estado === 'Creada')
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">{{$item->estado}}</span>
+                            @elseif($item->estado === 'Aprobada')
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-800 text-white italic">{{$item->estado}}</span>
+                            @elseif($item->estado === 'Rechazada')
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-200 text-black">{{$item->estado}}</span>
+                            @endif
+
+
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                           {{$item->created_at->diffForHumans()}}
+                                    </span>
+
+
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                           {{$item->updated_at->diffForHumans()}}
+                                    </span>
+
+                        </td>
+
                         <td class="px-10 py-3">
                             <div class="dropdown">
-
                                 <button type="button" class="btn btn-link text-secondary p-0" data-toggle="dropdown"
                                         data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-ellipsis-vertical fs-5"></i>
@@ -97,21 +132,26 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                    <a href="{{route('programas.show', $programa->NIS)}}"
+                                    <a href="{{route('Bitacoras.show', $item->id)}}"
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-eye w-5"></i> Ver
                                     </a>
+                                    <a href="{{route('bitacora.download', $item->id)}}"
+                                       class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-green-100 hover:text-gray-900 rounded-md transition-colors duration-150">
+                                        <i class="fas fa-download w-5"></i>  Descargar
+                                    </a>
 
-                                    <a href="{{route('Programas.edit', $programa->NIS)}}"
+                                    <a href="{{ route('Bitacoras.edit', $item->id) }}"
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                     </a>
 
                                     <div class="my-1 border-t border-gray-100"></div>
 
-                                    <form action="{{ route('Programas.destroy', $programa->NIS) }}" method="POST"
+                                    <form action="{{ route('Bitacoras.destroy', $item->id) }}" method="POST"
                                           class="form-eliminar">
                                         @csrf
+
                                         @method('DELETE')
                                         <button type="submit"
                                                 class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md w-full text-left transition-colors duration-150">
@@ -127,7 +167,7 @@
 
                 @empty
                     <tr class="bg-white border-b">
-                        <td colspan="7" class="px-6 py-10 text-center text-gray-500">
+                        <td colspan="10" class="px-6 py-10 text-center text-gray-500">
                             No hay registros disponibles.
                         </td>
                     </tr>
@@ -136,25 +176,36 @@
 
             </table>
         </div>
+
+
     </div>
 
+    <div class="mt-4">
+        {{ $bitacora->links() }}
+    </div>
+
+
+    <a href="{{route('bitacora.qr')}}">Ir</a>
+
+    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
+    </div>
 
 
 @endsection
 
-    @section('css')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-        <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
-    @endsection
+@section('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+@endsection
 
-    @section('js')
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="{{ asset('js/alerts.js') }}"></script>
-        <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ asset('js/alerts.js') }}"></script>
+    <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
 
-    @endsection
-
+@endsection
 
 

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tbl_roles_administrativos_NIS'
     ];
 
     /**
@@ -68,7 +69,15 @@ class User extends Authenticatable
 
     public function aprendiz()
     {
-        return $this->hasOne(aprendices::class);
+        return $this->hasOne(aprendices::class, 'users_id', 'id');
+    }
+
+    public function instructor(){
+        return $this->hasOne(instructor::class, 'users_id', 'id');
+    }
+
+    public function roles(){
+        return $this->belongsTo(rolesadministrativos::class, 'tbl_roles_administrativos_NIS', 'NIS');
     }
 
 }
