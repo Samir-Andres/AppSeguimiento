@@ -100,6 +100,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-lg p-4 flex flex-col items-center">
+             <div class="w-full max-w-70 flex flex-col h-full">
+                <h3 class="text-base font-medium text-slate-900 mb-2">
+                   Programa asignado
+                </h3>
+                <p class="text-xs text-slate-700 leading-relaxed mb-3">
+                    Mire y consulte el programa asignado
+                </p>
+                <div class='flex items-end justify-end'>
+                    <a href="{{route('ver.programa')}}" class="inline-flex items-center gap-2 bg-transparent border-0 text-slate-700 text-xs cursor-pointer p-0 hover:gap-2 group">
+                        Ir
+                        <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            class="transition-transform duration-300 group-hover:translate-x-1">
+                            <path d="M4.583 7.5h12.834M11 3.125 17.417 7.5 11 11.875" stroke="#314158" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
    <!-- <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-lg p-4 flex flex-col items-center">

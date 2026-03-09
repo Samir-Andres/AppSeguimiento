@@ -9,13 +9,13 @@ class tipodocumentos extends Model
     protected $table = 'tbl_tipo_documentos';
 
     protected $primaryKey = 'NIS';
-
-    public $incrementing = false;
+    public $incrementing = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'NIS',
         'Denominacion',
-        'Observacaiones'
+        'Observaciones'
     ];
 
     public function aprendices (){

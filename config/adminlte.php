@@ -317,6 +317,11 @@ return [
             'url' => '/Bitacoras',
             'icon' => 'far fa-file-pdf'
         ],
+        [
+            'text' => 'Ver bitácoras',
+            'url' => '/Ver/Bitacora',
+            'icon' => 'far fa-file-pdf'
+        ],
 
         [
             'text' => 'Registros',
@@ -335,7 +340,7 @@ return [
                 ],
                 [
                     'text' => 'Tipo de Documento',
-                    'url' => '/Tipo/Documentos/index',
+                    'url' => '/TipoDocumentos',
                     'icon' => 'fas fa-id-card',
                 ],
                 [

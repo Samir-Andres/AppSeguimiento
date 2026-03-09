@@ -40,13 +40,13 @@ class instructor extends Model
 
     public function eps(){
         return $this->belongsTo(eps::class, 'tbl_eps_NIS');
-    }
+        }
 
 
 
-    public  function  ficha_caractetizacion_Nis()
+    public  function  ficha()
     {
-        return $this->hasMany(fichacaracterizacion::class, 'tbl_ficha_caracterizacion', 'NIS');
+        return $this->hasMany(fichacaracterizacion::class, 'tbl_instructor_NIS', 'NIS');
 
     }
 

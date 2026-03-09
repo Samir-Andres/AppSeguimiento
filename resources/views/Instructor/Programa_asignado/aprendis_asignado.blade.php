@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@section('title', 'Bitácoras')
+@section('title', 'Aprendices asignados')
 
 
 @section('content_header')
@@ -36,11 +36,8 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Bienvenidos al centro de bitácoras,<span span
-                                                                                                 class="text-blue-600"></span> </strong>puedes crear eliminar y actualizar
+                <strong class="font-semibold uppercase">Bienvenidos, revise los aprendices de la ficha <span class="text-blue-600">{{$ficha->Denominacion}}</span> </strong>
             </p>
-            <a href="{{route('Bitacoras.create')}}"
-               class="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-xs hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900">Crear<i class="fas fa-plus-circle px-2"></i></a>
         </div>
         <div class="flex flex-1 justify-end">
 
@@ -59,69 +56,43 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">ID del sistema</th>
-                    <th scope="col" class="px-6 py-3">Archivo</th>
-                    <th scope="col" class="px-6 py-3">Aprendiz</th>
-                    <th scope="col" class="px-6 py-3">Estado</th>
-                    <th scope="col" class="px-6 py-3">Hora de creación</th>
-                    <th scope="col" class="px-6 py-3">Hora de actualización</th>
+                    <th scope="col" class="px-6 py-3">N. documentos</th>
+                    <th scope="col" class="px-6 py-3">Nombre</th>
+                    <th scope="col" class="px-6 py-3">Apellidos</th>
+                    <th scope="col" class="px-6 py-3">Documentación</th>
                     <th scope="col" class="px-6 py-3">Acción</th>
 
                 </tr>
                 </thead>
                 <tbody>
 
-                @forelse ($bitacora as $item)
+                @forelse ($aprendiz  as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
 
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->id}}
+                            {{ $item->NIS}}
 
-
-                        </td>
-
-                        <td class="px-6 py-3 whitespace-nowrap">
-                            <a href="{{ asset($item->file) }}" target="_blank" title="Ver">
-                                <i class="bi bi-filetype-pdf text-red-500"></i> </a>
-                        </td>
-
-                        <td class="px-6 py-3 whitespace-nowrap">
-
-                            @if ($item->Usuarios->name)
-                                {{ $item->Usuarios->name }}
-                            @else
-                                <span class="text-gray-400 italic">No tiene usuario</span>
-                            @endif
+                        </td>  <td class="px-6 py-3 whitespace-nowrap">
+                            {{ $item->Numdoc}}
 
                         </td>
 
                         <td class="px-6 py-3 whitespace-nowrap">
-
-                            @if ($item->estado === 'Creada')
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">{{$item->estado}}</span>
-                            @elseif($item->estado === 'Aprobada')
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-800 text-white italic">{{$item->estado}}</span>
-                            @elseif($item->estado === 'Rechazada')
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-200 text-black">{{$item->estado}}</span>
-                            @endif
-
+                            {{ $item->Nombres}}
 
                         </td>
+
                         <td class="px-6 py-3 whitespace-nowrap">
-                                <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                           {{$item->created_at->diffForHumans()}}
-                                    </span>
-
+                            {{ $item->Apellidos}}
 
                         </td>
+
                         <td class="px-6 py-3 whitespace-nowrap">
-                                <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                           {{$item->updated_at->diffForHumans()}}
-                                    </span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                               1
+                        </span>
 
                         </td>
-
                         <td class="px-10 py-3">
                             <div class="dropdown">
                                 <button type="button" class="btn btn-link text-secondary p-0" data-toggle="dropdown"
@@ -132,23 +103,23 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
 
 
-                                    <a href="{{route('Bitacoras.show', $item->id)}}"
+                                    <a href=""
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-eye w-5"></i> Ver
                                     </a>
-                                    <a href="{{route('bitacora.download', $item->id)}}"
+                                    <a href=""
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-green-100 hover:text-gray-900 rounded-md transition-colors duration-150">
                                         <i class="fas fa-download w-5"></i>  Descargar
                                     </a>
 
-                                    <a href="{{ route('Bitacoras.edit', $item->id) }}"
+                                    <a href=""
                                        class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
                                         <i class="fa-solid fa-pen-to-square w-5"></i> Editar
                                     </a>
 
                                     <div class="my-1 border-t border-gray-100"></div>
 
-                                    <form action="{{ route('Bitacoras.destroy', $item->id) }}" method="POST"
+                                    <form action="" method="POST"
                                           class="form-eliminar">
                                         @csrf
 
@@ -168,7 +139,7 @@
                 @empty
                     <tr class="bg-white border-b">
                         <td colspan="10" class="px-6 py-10 text-center text-gray-500">
-                            No hay registros disponibles.
+                            No hay aprendices asignados a programa.
                         </td>
                     </tr>
                 @endforelse
@@ -181,11 +152,10 @@
     </div>
 
     <div class="mt-4">
-        {{ $bitacora->links() }}
+        {{ $aprendiz->links() }}
     </div>
 
 
-    <a href="{{route('bitacora.qr')}}">Ir</a>
 
     <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
     </div>
@@ -194,17 +164,10 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
 @endsection
 
 @section('js')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{{ asset('js/alerts.js') }}"></script>
-    <script src="{{ asset('js/deleteSweetAlert.js') }}"></script>
 
 @endsection
 

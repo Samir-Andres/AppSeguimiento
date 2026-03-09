@@ -103,9 +103,7 @@
                     <input id="email" type="email" name="email" value="{{ old('email') }}"
                         class="w-full border bg-indigo-500/5 border-gray-500/10 outline-none rounded py-2.5 px-3 @error('email') border-red-500 @enderror"
                         placeholder="Correo electrónico" autocomplete="email" autofocus>
-                    @error('email')
-                        <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span>
-                    @enderror
+
                 </div>
 
                 <!-- Password -->
@@ -113,9 +111,7 @@
                     <input id="password" type="password" name="password"
                         class="w-full border bg-indigo-500/5 border-gray-500/10 outline-none rounded py-2.5 px-3 @error('password') border-red-500 @enderror"
                         placeholder="Contraseña" autocomplete="current-password">
-                    @error('password')
-                        <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span>
-                    @enderror
+
                 </div>
 
                 <!-- Remember Me & Forgot Password -->

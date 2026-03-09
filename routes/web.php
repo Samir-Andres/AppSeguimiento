@@ -69,7 +69,7 @@ Route::delete('/Eps/Delete/{NIS}', [EpsController::class, 'destroy'])->name('eps
 Route::resource('/Rolesadministrativos', RolesadministrativosController::class)->middleware('auth');
 
 // Ruta al index de Tipo de documentos
-Route::get('/Tipo/Documentos/index', [TipodocumentosController::class, 'index'])->name('tipodocumentos.index')->middleware('auth');
+Route::resource('/TipoDocumentos', TipodocumentosController::class)->middleware('auth');
 
 
 Route::get('/clear', function () {
@@ -84,12 +84,19 @@ Route::resource('/Bitacoras', BitacoraController::class)->middleware('auth');
 Route::get('/Bitacora/{id}/download', [BitacoraController::class, 'download'] )->name('bitacora.download')->middleware('auth');
 Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->middleware('auth');
 
+Route::resource('/Ficha_caracterizacion', FichacaracterizacionController::class)->middleware('auth');
 
 //Ruta resource para ente conformadores donde contendrá los métodos CRUD
 Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
+
+
+
 Route::resource('/Instructores', InstructorController::class)->middleware('auth');
-Route::get('/Ver/Bitacora', [InstructorController::class, 'VerBitacora'])->name('ver.bitacora')->middleware('auth');
-Route::resource('/Ficha_caracterizacion', FichacaracterizacionController::class)->middleware('auth');
+Route::get('/Ver/Programa', [InstructorController::class, 'programa_asignado'])->name('ver.programa')->middleware('auth');
+
+Route::get('/Ver/Aprendices/{NIS}', [InstructorController::class, 'Programa_aprendices'])->name('ver.aprendices')->middleware('auth');
+Route::get('/Ver/Documentacion/{NIS}', [InstructorController::class, 'Aprendices_documentacion'])->name('ver.documentacion')->middleware('auth');
+
 
 
 

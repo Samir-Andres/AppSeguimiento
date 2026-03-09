@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\aprendices;
 use App\Models\bitacora;
 use App\Models\eps;
+use App\Models\fichacaracterizacion;
 use App\Models\instructor;
 use App\Models\rolesadministrativos;
 use App\Models\tipodocumentos;
 use App\Models\User;
 use App\Notifications\PasswordEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -131,6 +134,7 @@ class InstructorController extends Controller
                     'name' => $request->Nombres,
                     'email' => $request->Correo_Institucional,
                     'password' => $passwordEncript,
+                    'tbl_roles_administrativos_NIS' =>5
                 ]
             );
 
@@ -290,12 +294,43 @@ class InstructorController extends Controller
         }
     }
 
-
     public function  VerBitacora()
     {
+       $instructor  = Auth::user()->instructor->users_id;
 
-        $bitacora =  bitacora::where('users_id')->paginate(10);
-        return view('Bitacora.index', compact('bitacora'));
+        $aprendiz = aprendices::with('ficha_caracterizacion')
+            ->whereRelation('ficha_caracterizacion', 'tbl_instructor_NIS', $instructor)
+            ->paginate(10);
+
+        return view('Bitacora.Bitacoras.bitacoras_aprendiz', compact('aprendiz'));
+
+
 
     }
+
+    public function programa_asignado()
+    {
+        $fichas = Auth::user()->instructor->ficha;
+
+        return view('Instructor.Programa_asignado.programa_asignado', compact('fichas'));
+
+    }
+
+    public function Programa_aprendices($NIS)
+    {
+        $ficha = fichacaracterizacion::where('NIS', $NIS)->first();
+        $aprendiz = aprendices::where('tbl_ficha_caracterizacion_NIS', $NIS)->paginate(10);
+
+        return view('Instructor.Programa_asignado.aprendis_asignado', compact('ficha','aprendiz'));
+
+    }
+
+    public function Aprendices_documentacion($NIS)
+    {
+
+
+    }
+
+
+
 }
