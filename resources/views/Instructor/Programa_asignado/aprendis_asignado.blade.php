@@ -19,7 +19,21 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Bitácoras</a>
+        <a href="{{route('ver.programa')}}"  class="text-gray-500 no-underline  hover:text-indigo-500">Programa asignados</a>
+
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
+                fill="#CBD5E1" />
+        </svg>
+        <a href="{{route('ver.programa')}}" class="text-gray-500 no-underline hover:text-indigo-500">{{$ficha->Denominacion}}</a>
+
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
+                fill="#CBD5E1" />
+        </svg>
+        <a class="text-indigo-500">Aprendices</a>
 
     </div>
 
@@ -36,9 +50,11 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Bienvenidos, revise los aprendices de la ficha <span class="text-blue-600">{{$ficha->Denominacion}}</span> </strong>
+                <strong class="font-semibold uppercase">Bienvenidos, revise los aprendices de la ficha <span class="text-blue-600">{{$ficha->Denominacion}}</span>, el total de aprendices {{$aprendiz->count()}} </strong>
             </p>
+
         </div>
+
         <div class="flex flex-1 justify-end">
 
         </div>
@@ -55,12 +71,14 @@
             <table class="w-full text-sm text-left text-gray-500" id="tabla_alternativas">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
-                    <th scope="col" class="px-6 py-3">ID del sistema</th>
                     <th scope="col" class="px-6 py-3">N. documentos</th>
                     <th scope="col" class="px-6 py-3">Nombre</th>
                     <th scope="col" class="px-6 py-3">Apellidos</th>
+                    <th scope="col" class="px-6 py-3">Teléfono</th>
+                    <th scope="col" class="px-6 py-3">Correo institucional</th>
+                    <th scope="col" class="px-6 py-3">Correo personal</th>
+                    <th scope="col" class="px-6 py-3">Total de bitácoras</th>
                     <th scope="col" class="px-6 py-3">Documentación</th>
-                    <th scope="col" class="px-6 py-3">Acción</th>
 
                 </tr>
                 </thead>
@@ -69,10 +87,7 @@
                 @forelse ($aprendiz  as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
 
-                        <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->NIS}}
-
-                        </td>  <td class="px-6 py-3 whitespace-nowrap">
+                       <td class="px-6 py-3 whitespace-nowrap">
                             {{ $item->Numdoc}}
 
                         </td>
@@ -86,59 +101,48 @@
                             {{ $item->Apellidos}}
 
                         </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            {{ $item->Telefono}}
+
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            {{ $item->Correo_Institucional}}
+
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            {{ $item->Correo_Personal}}
+
+                        </td>
+                        <td class="px-6 py-3 whitespace-nowrap">
+
+                       <span class="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium w-fit">
+
+                       {{ $item->bitacoras_pendientes_count }}
+
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+
+                       <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L19.5 10H13V3.5zM8 13h1.5a1.5 1.5 0 1 1 0 3H9v2H8v-5zm1 1v1h.5a.5.5 0 0 0 0-1H9zm4-1h1.2a2 2 0 0 1 0 4H13v1h-1v-5h1zm1 1h-.5v2h.5a1 1 0 0 0 0-2zm4-1h-2v5h1v-2h1v-1h-1v-1h1v-1z"/>
+
+                       </svg>
+                           por revisar
+
+                       </span>
+
+                        </td>
+
 
                         <td class="px-6 py-3 whitespace-nowrap">
                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                               1
+                             <a href="{{route('ver.documentacion', $item->NIS)}}" class="text-inherit no-underline hover:text-green-800"> <span> Ver documentación</span></a>
+
                         </span>
 
                         </td>
-                        <td class="px-10 py-3">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-link text-secondary p-0" data-toggle="dropdown"
-                                        data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-ellipsis-vertical fs-5"></i>
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-right shadow-lg border-0 p-2">
-
-
-                                    <a href=""
-                                       class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-md transition-colors duration-150">
-                                        <i class="fa-solid fa-eye w-5"></i> Ver
-                                    </a>
-                                    <a href=""
-                                       class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-green-100 hover:text-gray-900 rounded-md transition-colors duration-150">
-                                        <i class="fas fa-download w-5"></i>  Descargar
-                                    </a>
-
-                                    <a href=""
-                                       class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 rounded-md transition-colors duration-150">
-                                        <i class="fa-solid fa-pen-to-square w-5"></i> Editar
-                                    </a>
-
-                                    <div class="my-1 border-t border-gray-100"></div>
-
-                                    <form action="" method="POST"
-                                          class="form-eliminar">
-                                        @csrf
-
-                                        @method('DELETE')
-                                        <button type="submit"
-                                                class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 rounded-md w-full text-left transition-colors duration-150">
-                                            <i class="fa-solid fa-trash w-5"></i> Eliminar
-                                        </button>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </td>
-
                     </tr>
 
                 @empty
                     <tr class="bg-white border-b">
-                        <td colspan="10" class="px-6 py-10 text-center text-gray-500">
+                        <td colspan=6" class="px-6 py-10 text-center text-gray-500">
                             No hay aprendices asignados a programa.
                         </td>
                     </tr>
@@ -149,6 +153,8 @@
         </div>
 
 
+
+
     </div>
 
     <div class="mt-4">
@@ -157,18 +163,7 @@
 
 
 
-    <div id="session-messages" data-success="{{ session('success') }}" data-error="{{ session('error') }}">
-    </div>
-
-
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-@endsection
-
-@section('js')
-
-@endsection
 
 

@@ -55,9 +55,8 @@ class instructor extends Model
         return $this->Correo_Institucional;
     }
 
-    public function user()
+    public function user(){
 
-{
     return $this->hasOne(User::class, 'users_id', 'id');
 
 }

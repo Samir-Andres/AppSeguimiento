@@ -53,11 +53,14 @@ class BitacoraController extends Controller
 
         DB::beginTransaction();
 
+        $aprendiz = Auth::user()->aprendiz;
+
         try {
 
           $bitacora =  bitacora::create([
                 'file' => 'Documentos/bitacoras/' . $documento,
                 'users_id' => Auth::id(),
+                'tbl_aprendices_NIS' => $aprendiz->NIS,
             ]);
 
             $user = Auth::user();

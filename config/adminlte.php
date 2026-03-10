@@ -318,8 +318,8 @@ return [
             'icon' => 'far fa-file-pdf'
         ],
         [
-            'text' => 'Ver bitácoras',
-            'url' => '/Ver/Bitacora',
+            'text' => 'Ver Programa',
+            'url' => '/Ver/Programa',
             'icon' => 'far fa-file-pdf'
         ],
 

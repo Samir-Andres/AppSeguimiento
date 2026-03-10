@@ -319,7 +319,8 @@ class InstructorController extends Controller
     public function Programa_aprendices($NIS)
     {
         $ficha = fichacaracterizacion::where('NIS', $NIS)->first();
-        $aprendiz = aprendices::where('tbl_ficha_caracterizacion_NIS', $NIS)->paginate(10);
+        $aprendiz = aprendices::where('tbl_ficha_caracterizacion_NIS', $NIS)->withCount('bitacoras_pendientes')->paginate(10);
+
 
         return view('Instructor.Programa_asignado.aprendis_asignado', compact('ficha','aprendiz'));
 
@@ -329,8 +330,14 @@ class InstructorController extends Controller
     {
 
 
+        $aprendiz = aprendices::with('ficha_caracterizacion')->findOrFail($NIS);
+        $ficha = $aprendiz->ficha_caracterizacion;
+
+        $bitacora = bitacora::where('tbl_aprendices_NIS', $NIS)->where('Estado', 'Creada')->paginate(10);
+
+        return view('Bitacora.Bitacoras.bitacoras_aprendiz', compact('aprendiz','bitacora', 'ficha'));
+
+
     }
-
-
 
 }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@section('title', 'Bitácoras')
+@section('title', 'Programas asignados')
 
 
 @section('content_header')
@@ -19,7 +19,7 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Programa</a>
+        <a class="text-indigo-500">Programa asignados</a>
 
     </div>
 

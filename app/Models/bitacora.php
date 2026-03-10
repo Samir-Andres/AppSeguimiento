@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class bitacora extends Model
 {
@@ -16,11 +17,16 @@ class bitacora extends Model
         'id',
         'file',
         'estado',
-        'users_id'
+        'users_id',
+        'tbl_aprendices_NIS'
     ];
 
     public function Usuarios(){
         return $this->belongsTo(User::class,'users_id');
+}
+
+public function aprendiz(){
+        return $this->belongsTo(aprendices::class,'tbl_aprendices_NIS', 'NIS');
 }
 
 

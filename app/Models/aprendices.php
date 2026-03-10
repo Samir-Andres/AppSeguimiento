@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class aprendices extends Model
 {
@@ -49,6 +50,16 @@ class aprendices extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id');
+    }
+
+    public function bitacora(){
+        return $this->hasMany(bitacora::class, 'tbl_aprendices_NIS', 'NIS');
+    }
+
+    public function bitacoras_pendientes()
+    {
+        return $this->hasMany(bitacora::class, 'tbl_aprendices_NIS', 'NIS')
+            ->where('estado', 'Creada');
     }
 
 }

@@ -19,6 +19,27 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
+        <a href="{{route('ver.programa')}}" >Programa asignados</a>
+
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
+                fill="#CBD5E1" />
+        </svg>
+        <a href="{{route('ver.programa')}}" >{{$ficha->Denominacion}}</a>
+
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
+                fill="#CBD5E1" />
+        </svg>
+        <a href="{{route('ver.aprendices', $ficha->NIS)}}" class="">Aprendices</a>
+
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
+                fill="#CBD5E1" />
+        </svg>
         <a class="text-indigo-500">Bitácoras</a>
 
     </div>
@@ -36,14 +57,15 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Bienvenidos al centro de bitácoras,<span class="text-blue-600"></span> </strong>puedes cambiar el estado de la bitácora del aprendiz.
+                <strong class="font-semibold uppercase">Bienvenidos al centro de bitácora del aprendiz <span class="text-blue-600">{{$aprendiz->Nombres }} {{$aprendiz->Apellidos}}</span> </strong>
             </p>
-             </div>
+
+        </div>
+
         <div class="flex flex-1 justify-end">
 
         </div>
     </div>
-
 @stop
 
 @section('content')
@@ -56,8 +78,8 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">ID del sistema</th>
-                    <th scope="col" class="px-6 py-3">Nombre</th>
-                    <th scope="col" class="px-6 py-3">Apellidos</th>
+                    <th scope="col" class="px-6 py-3">bitácora</th>
+                    <th scope="col" class="px-6 py-3">Nombre del aprendiz</th>
                     <th scope="col" class="px-6 py-3">Estado</th>
                     <th scope="col" class="px-6 py-3">Hora de creación</th>
                     <th scope="col" class="px-6 py-3">Hora de actualización</th>
@@ -67,33 +89,33 @@
                 </thead>
                 <tbody>
 
-                @forelse ($aprendiz  as $item)
+                @forelse ($bitacora  as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
 
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->NIS}}
+                            {{ $item->id}}
 
                         </td>
 
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->Nombres}}
+                            <a href="{{ asset($item->file) }}" target="_blank" title="Ver">
+                                <i class="bi bi-filetype-pdf text-red-500"></i> </a>
+                        </td>
+
+                        <td class="px-6 py-3 whitespace-nowrap">
+                            {{ $item->aprendiz->Nombres}}
 
                         </td>
 
                         <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->Apellidos}}
-
-                        </td>
-
-                        <td class="px-6 py-3 whitespace-nowrap">
-                            {{ $item->ficha_caracterizacion->Denominacion ?? 'Sin ficha' }}
+                            {{ $item->estado}}
 
                         </td>
 
                         <td class="px-6 py-3 whitespace-nowrap">
                                 <span
                                     class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                           {{$item->ficha_caracterizacion->Fecha_Inicio}}
+                                           {{$item->created_at}}
                                     </span>
 
 
@@ -101,7 +123,7 @@
                         <td class="px-6 py-3 whitespace-nowrap">
                                 <span
                                     class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                           {{$item->ficha_caracterizacion->Fecha_Fin}}
+                                           {{$item->updated_at}}
                                     </span>
 
                         </td>
@@ -165,7 +187,7 @@
     </div>
 
     <div class="mt-4">
-        {{ $aprendiz->links() }}
+        {{ $bitacora->links() }}
     </div>
 
 
