@@ -370,7 +370,15 @@ return [
                 ],
             ],
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Bitácoras aprobadas'],
+         [
+            'text' => 'Bitácoras aprobadas',
+             'url' => '/Ver/Programa/Aprobado',
+             'icon' => 'far fa-file-pdf',
+         ],
+
+
+        ['header' => 'Ajustes de la cuenta'],
 
         [
             'text' => 'Contraseña',

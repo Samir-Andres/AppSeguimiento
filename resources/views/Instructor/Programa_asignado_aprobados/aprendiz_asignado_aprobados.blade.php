@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@section('title', 'Aprendices asignados')
+@section('title', 'Aprendices aprobados')
 
 
 @section('content_header')
@@ -19,7 +19,7 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a href="{{route('ver.programa')}}"  class="text-gray-500 no-underline  hover:text-indigo-500">Programa asignados</a>
+        <a href="{{route('ver.programa.aprobados')}}"  class="text-gray-500 no-underline  hover:text-indigo-500">Programas asignado aprobados</a>
 
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -80,7 +80,7 @@
                 @forelse ($aprendiz  as $item)
                     <tr class="bg-white border-b hover:bg-gray-50">
 
-                       <td class="px-6 py-3 whitespace-nowrap">
+                        <td class="px-6 py-3 whitespace-nowrap">
                             {{ $item->Numdoc}}
 
                         </td>
@@ -108,16 +108,17 @@
                         </td>
                         <td class="px-6 py-3 whitespace-nowrap">
 
-                       <span class="flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-full text-sm font-medium w-fit">
+                       <span class="flex items-center gap-2 px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
 
-                       {{ $item->bitacoras_pendientes_count }}
 
-                       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4">
+                       {{ $item->bitacoras_aprobadas_count }}
+
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4 text-red-500">
 
                        <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L19.5 10H13V3.5zM8 13h1.5a1.5 1.5 0 1 1 0 3H9v2H8v-5zm1 1v1h.5a.5.5 0 0 0 0-1H9zm4-1h1.2a2 2 0 0 1 0 4H13v1h-1v-5h1zm1 1h-.5v2h.5a1 1 0 0 0 0-2zm4-1h-2v5h1v-2h1v-1h-1v-1h1v-1z"/>
 
                        </svg>
-                           por revisar
+                           Aprobadas
 
                        </span>
 
@@ -126,7 +127,7 @@
 
                         <td class="px-6 py-3 whitespace-nowrap">
                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                             <a href="{{route('ver.documentacion', $item->NIS)}}" class="text-inherit no-underline hover:text-green-800"> <span> Ver documentación</span></a>
+                             <a href="{{route('ver.bitacoras.aprobada', $item->NIS)}}" class="text-inherit no-underline hover:text-green-800"> <span> Ver documentación</span></a>
 
                         </span>
 
@@ -144,8 +145,6 @@
 
             </table>
         </div>
-
-
 
 
     </div>

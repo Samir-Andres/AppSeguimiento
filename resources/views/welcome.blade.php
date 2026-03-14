@@ -44,7 +44,6 @@
             <!-- Menú Móvil  -->
             <div id="mobile-menu"
                 class="hidden absolute top-full left-0 w-full bg-white z-50 border-b shadow-xl flex-col items-center p-6 gap-4 sm:hidden">
-                <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium">Dashboard</a>
                 <a href="#nosotros" class="text-gray-600 hover:text-indigo-600 font-medium">Nosotros</a>
                 <a href="#"
                     class="text-gray-600 hover:text-indigo-600 font-medium border-b w-full text-center pb-4">Contactos</a>
@@ -70,7 +69,6 @@
             <!-- Menú Desktop -->
             <div class="hidden sm:flex items-center gap-4 md:gap-8">
                 <div class="flex items-center gap-4 md:gap-6 text-sm font-medium text-gray-600">
-                    <a href="{{ route('home') }}" class="hover:text-indigo-600 transition">Dashboard</a>
                     <a href="#nosotros" class="hover:text-indigo-600 transition">Sobre nosotros</a>
                     <a href="#" class="hover:text-indigo-600 transition">Contactos</a>
                 </div>

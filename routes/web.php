@@ -92,15 +92,21 @@ Route::resource('/Entecoformadores', EntecoformadoresController::class)->middlew
 
 
 Route::resource('/Instructores', InstructorController::class)->middleware('auth');
-Route::get('/Ver/Programa', [InstructorController::class, 'programa_asignado'])->name('ver.programa')->middleware('auth');
 
+//Rutas para ver los programas asignados del instructor logueado
+//Rutas donde ver la documentación de los aprendices con sus respectivas rutas para rechazar y aprobar bitácoras
+Route::get('/Ver/Programa', [InstructorController::class, 'programa_asignado'])->name('ver.programa')->middleware('auth');
 Route::get('/Ver/Aprendices/{NIS}', [InstructorController::class, 'Programa_aprendices'])->name('ver.aprendices')->middleware('auth');
 Route::get('/Ver/Documentacion/{NIS}', [InstructorController::class, 'Aprendices_documentacion'])->name('ver.documentacion')->middleware('auth');
+Route::put('/Cambiar/estado/{id}', [InstructorController::class, 'Aprobar_bitacora'])->name('aprobar.bitacora')->middleware('auth');
+Route::put('/Rechazar/Bitacora/{id}', [InstructorController::class, 'Rechazar_bitacora'])->name('rechazar.bitacora')->middleware('auth');
 
+//Rutas para ver los programas que se le esta haciendo seguimineto
+Route::get('/Ver/Programa/Aprobado', [InstructorController::class, 'programa_asignado_aprobados'])->name('ver.programa.aprobados')->middleware('auth');
+Route::get('/Ver/Aprendiz/Aprobados/{NIS}', [InstructorController::class, 'programa_aprendices_aprobados'])->name('ver.aprendices.aprobados')->middleware('auth');
+Route::get('/Ver/Bitacoras/Aprobada/{NIS}', [InstructorController::class, 'Bitacora_aprendiz_aprobadas'])->name('ver.bitacoras.aprobada')->middleware('auth');
 
-
-
-
+Route::put('/Desaprobar/Bitacora/{id}', [InstructorController::class, 'Desaprobar_bitacora'])->name('desaprobar.bitacora')->middleware('auth');
 
 
 

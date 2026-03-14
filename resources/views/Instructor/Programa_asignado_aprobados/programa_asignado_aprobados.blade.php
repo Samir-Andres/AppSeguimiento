@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@section('title', 'Programas asignados')
+@section('title', 'Programas asignado y aprobados')
 
 
 @section('content_header')
@@ -19,7 +19,7 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a class="text-indigo-500">Programa asignados</a>
+        <a class="text-indigo-500">Programas asignado aprobados</a>
 
     </div>
 
@@ -36,7 +36,7 @@
         </div>
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
             <p class="text-sm/6 text-gray-900">
-                <strong class="font-semibold uppercase">Bienvenidos al centro de programas asignados, instructor <span class="text-blue-600">{{ $instructor->Nombres}} {{$instructor->Apellidos}}</span>  </strong>puedes consultar su programa asignado.
+                <strong class="font-semibold uppercase">Bienvenidos al centro de programas asignados aprobados, instructor <span class="text-blue-600">{{ $instructor->Nombres}} {{$instructor->Apellidos}}</span> Podrá ver el programa al cual le está haciendo el seguimiento, </strong>puedes consultar su programa asignado {{$fichas->first()->Denominacion}}.
             </p>
         </div>
         <div class="flex flex-1 justify-end">
@@ -81,7 +81,7 @@
 
                         <div class="border-t px-4 py-3 flex justify-center">
 
-                            <a href="{{route('ver.aprendices', $ficha->NIS)}}"
+                            <a href="{{route('ver.aprendices.aprobados', $ficha->NIS)}}"
                                class="border text-sm text-gray-500 border-gray-200 hover:bg-gray-100 transition cursor-pointer px-6 py-1 rounded-full flex flex-col items-center justify-center">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -19,7 +19,7 @@ class AprendicesController extends Controller
     public function index()
     {
 
-        $aprendices = aprendices::paginate();
+        $aprendices = aprendices::paginate(10);
         return view('Aprendices.index', compact('aprendices'));
     }
 

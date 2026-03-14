@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-@section('title', 'Bitácoras')
+@section('title', 'Bitácoras aprobadas')
 
 
 @section('content_header')
@@ -19,14 +19,14 @@
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a href="{{ route('ver.programa') }}">Programa asignados</a>
+        <a href="{{ route('ver.programa.aprobados') }}">Programa asignados aprobados</a>
 
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="m14.413 10.663-6.25 6.25a.939.939 0 1 1-1.328-1.328L12.42 10 6.836 4.413a.939.939 0 1 1 1.328-1.328l6.25 6.25a.94.94 0 0 1-.001 1.328"
                 fill="#CBD5E1" />
         </svg>
-        <a href="{{ route('ver.aprendices', $ficha->NIS) }}">{{ $ficha->Denominacion }}</a>
+        <a href="{{ route('ver.aprendices.aprobados', $ficha->NIS) }}">{{ $ficha->Denominacion }}</a>
 
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -78,7 +78,7 @@
                         <th scope="col" class="px-6 py-3">Estado</th>
                         <th scope="col" class="px-6 py-3">Hora de creación</th>
                         <th scope="col" class="px-6 py-3">Hora de actualización</th>
-                        <th scope="col" class="px-6 py-3">Aprobar/Rechazar</th>
+                        <th scope="col" class="px-6 py-3">Desaprobar</th>
 
                     </tr>
                 </thead>
@@ -92,9 +92,12 @@
 
                             </td>
 
-                            <td class="px-6  whitespace-nowrap">
-                                <a href="{{ asset($item->file) }}" target="_blank" title="Ver">
-                                    <i class="bi bi-filetype-pdf text-red-500"></i> </a>
+                            <td class="px-6  whitespace-nowrap ">
+                               <span class="flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                   <a href="{{ asset($item->file) }}" target="_blank" title="Ver" >
+                                    <i class="bi bi-filetype-pdf text-red-500"></i> </a> Archivo
+
+                                </span>
                             </td>
 
                             <td class="px-6 py-2  whitespace-nowrap">
@@ -103,9 +106,9 @@
                             </td>
 
                             <td class="px-6 py-2 whitespace-nowrap">
-                                <span  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-400 text-white">
-                               @if($item->estado)
-                                   Pendiente
+                                <span   class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    @if($item->estado)
+                                   {{$item->estado}}
                                @endif
                                 </span>
 
@@ -129,9 +132,9 @@
 
                             <td class="px-7 py-2 whitespace-nowrap ">
 
-                                {{--Boton de cambiar estado de creada a Aprobada--}}
-                                <button class="btn-aprobar-bitacora text-green-400 px-3" title="Aprobar"
-                                    data-url="{{ route('aprobar.bitacora', $item->id) }}"
+                                {{--Boton de cambiar estado de Aprobada a creada, para cambiar el estado a creada--}}
+                                <button class="btn-desaprobar-bitacora text-green-400 px-3" title="Aprobar"
+                                    data-url="{{ route('desaprobar.bitacora', $item->id) }}"
                                     data-nombre="{{ $item->aprendiz->Nombres }} {{ $item->aprendiz->Apellidos }}">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -140,24 +143,7 @@
                                 </button>
 
                                 <!--Formulario que envía al controlador para cambiar estado de creada a Aprobada-->
-                                <form id="form-aprobar-bitacora" method="POST" class="hidden">
-                                    @csrf
-                                    @method('PUT')
-                                </form>
-
-
-                                {{--Boton para cambiar estado de la bitacora de creada a rechazada--}}
-                                <button class="btn-rechazar-bitacora text-red-400" title="Rechazar"
-                                    data-url="{{ route('rechazar.bitacora', $item->id) }}"
-                                    data-nombre="{{ $item->aprendiz->Nombres }} {{ $item->aprendiz->Apellidos }}">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                    </svg>
-                                </button>
-
-                                <!--Formulario que envía al controlador para cambiar estado de creada a Rechazada-->
-                                <form id="form-rechazar-bitacora" method="POST" class="hidden">
+                                <form id="form-desaprobar-bitacora" method="POST" class="hidden">
                                     @csrf
                                     @method('PUT')
                                 </form>
@@ -169,7 +155,7 @@
                     @empty
                         <tr class="bg-white border-b">
                             <td colspan="10" class="px-6 py-10 text-center text-gray-500">
-                                No hay registros disponibles.
+                                No hay registros disponibles para desaprobar para el aprendiz <span class="text-blue-600">  {{$aprendiz->Nombres }} {{ $aprendiz->Apellidos}} </span>.
                             </td>
                         </tr>
                     @endforelse
@@ -201,7 +187,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{{ asset('js/alerts.js') }}"></script>
-    <script src="{{ asset('js/AceptarBitacora.js') }}"></script>
-    <script src="{{ asset('js/RechazarBitacora.js') }}"></script>
+    <script src="{{ asset('js/DesaprobarBitacora.js') }}"></script>
+
 
 @endsection

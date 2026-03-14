@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class aprendices extends Model
 {
+
+    use Notifiable;
     protected $table = 'tbl_aprendices';
 
     protected $primaryKey = 'NIS';
@@ -60,6 +63,20 @@ class aprendices extends Model
     {
         return $this->hasMany(bitacora::class, 'tbl_aprendices_NIS', 'NIS')
             ->where('estado', 'Creada');
+    }
+
+    public function bitacoras_aprobadas()
+    {
+        return $this->hasMany(bitacora::class, 'tbl_aprendices_NIS', 'NIS')
+            ->where('estado', 'Aprobada');
+
+    }
+
+    public function routeNotificationForMail($notification)
+    {
+
+        return $this->Correo_Institucional;
+
     }
 
 }

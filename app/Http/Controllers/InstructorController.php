@@ -10,6 +10,10 @@ use App\Models\instructor;
 use App\Models\rolesadministrativos;
 use App\Models\tipodocumentos;
 use App\Models\User;
+use App\Notifications\BitacoraAprobadaInstructorNotification;
+use App\Notifications\BitacoraAprobadaNotification;
+use App\Notifications\BitacoraRechazadaInstructorNotification;
+use App\Notifications\BitacoraRechazadaNotification;
 use App\Notifications\PasswordEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,9 +38,9 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        $eps =  eps::all();
+        $eps = eps::all();
         $documento = tipodocumentos::all();
-        return view('Instructor.create', compact('eps','documento'));
+        return view('Instructor.create', compact('eps', 'documento'));
     }
 
     /**
@@ -110,9 +114,7 @@ class InstructorController extends Controller
         try {
 
 
-
-
-            $instructor =  instructor::create([
+            $instructor = instructor::create([
                 'tbl_tipo_documentos_NIS' => $request->tbl_tipo_documentos_NIS,
                 'Numdoc' => $request->Numdoc,
                 'Nombres' => $request->Nombres,
@@ -134,23 +136,22 @@ class InstructorController extends Controller
                     'name' => $request->Nombres,
                     'email' => $request->Correo_Institucional,
                     'password' => $passwordEncript,
-                    'tbl_roles_administrativos_NIS' =>5
+                    'tbl_roles_administrativos_NIS' => 5
                 ]
             );
 
 
-                DB::commit();
+            DB::commit();
 
-             $instructor->notify(new  PasswordEmail($instructor->Correo_Institucional, $instructor->Nombres, $instructor->pellidos, $password));
+            $instructor->notify(new  PasswordEmail($instructor->Correo_Institucional, $instructor->Nombres, $instructor->pellidos, $password));
 
-                return back()->with('success', 'El instructor se ha registrado correctamente');
+            return back()->with('success', 'El instructor se ha registrado correctamente');
 
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return back()->with('error', 'Error al registrar el instructor'. $e->getMessage());
-            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Error al registrar el instructor' . $e->getMessage());
         }
-
+    }
 
 
     /**
@@ -197,61 +198,61 @@ class InstructorController extends Controller
 
 
         ],
-        [
+            [
 
-            'tbl_tipo_documentos_NIS.required' => 'El tipo de documento es obligatorio',
+                'tbl_tipo_documentos_NIS.required' => 'El tipo de documento es obligatorio',
 
-            'Numdoc.required' => 'El número de documento es obligatorio',
-            'Numdoc.numeric' => 'El número de documento debe ser numérico',
-            'Numdoc.digits_between' => 'El número debe estar entre 5 y 20 dígitos',
-            'Numdoc.unique' => 'El número de documento ya existe',
+                'Numdoc.required' => 'El número de documento es obligatorio',
+                'Numdoc.numeric' => 'El número de documento debe ser numérico',
+                'Numdoc.digits_between' => 'El número debe estar entre 5 y 20 dígitos',
+                'Numdoc.unique' => 'El número de documento ya existe',
 
-            'Nombres.required' => 'El nombres es obligatorio',
-            'Nombres.max' => 'El nombre no puede exceder los 100 caracteres',
-            'Nombres.min' => 'El nombre no puede contener menos de 2 caracteres',
-            'Nombres.regex' => 'El nombre no puede contener números',
+                'Nombres.required' => 'El nombres es obligatorio',
+                'Nombres.max' => 'El nombre no puede exceder los 100 caracteres',
+                'Nombres.min' => 'El nombre no puede contener menos de 2 caracteres',
+                'Nombres.regex' => 'El nombre no puede contener números',
 
-            'Apellidos.required' => 'El apellidos es obligatorio',
-            'Apellidos.max' => 'El apellidos no puede exceder los 100 caracteres',
-            'Apellidos.min' => 'El apellidos no puede contener menos de 2 caracteres',
-            'Apellidos.regex' => 'El apellidos no puede contener números',
+                'Apellidos.required' => 'El apellidos es obligatorio',
+                'Apellidos.max' => 'El apellidos no puede exceder los 100 caracteres',
+                'Apellidos.min' => 'El apellidos no puede contener menos de 2 caracteres',
+                'Apellidos.regex' => 'El apellidos no puede contener números',
 
-            'Direccion.max' => 'El dirección no puede exceder los 100 caracteres',
-            'Direccion.min' => 'El dirección no puede contener menos de 2 caracteres',
-            'Direccion.regex' => 'El apellidos no puede contener números',
+                'Direccion.max' => 'El dirección no puede exceder los 100 caracteres',
+                'Direccion.min' => 'El dirección no puede contener menos de 2 caracteres',
+                'Direccion.regex' => 'El apellidos no puede contener números',
 
-            'Telefono.required' => 'El número teléfono es obligatorio',
-            'Telefono.numeric' => 'El número teléfono debe ser numérico ',
-            'Telefono.digits_between' => 'El número de teléfono debe estar entre 10 y 50 dígitos incluyendo espacios y signos',
-            'Telefono.unique' => 'El numero ya se encuentra registrado en el sistema',
+                'Telefono.required' => 'El número teléfono es obligatorio',
+                'Telefono.numeric' => 'El número teléfono debe ser numérico ',
+                'Telefono.digits_between' => 'El número de teléfono debe estar entre 10 y 50 dígitos incluyendo espacios y signos',
+                'Telefono.unique' => 'El numero ya se encuentra registrado en el sistema',
 
-            'Correo_Institucional.required' => 'El correo es obligatorio',
-            'Correo_Institucional.email' => 'El correo debe ser valido',
-            'Correo_Institucional.unique' => 'El correo ya se encuentra registrado en el sistema',
-            'Correo_Institucional.min' => 'El correo debe tener al menos 11 caracteres',
-            'Correo_Institucional.max' => 'El correo debe tener al menos 50 caracteres',
-            'Correo_Institucional.ends_with' => 'El correo debe terminar con el formato correcto, .com',
+                'Correo_Institucional.required' => 'El correo es obligatorio',
+                'Correo_Institucional.email' => 'El correo debe ser valido',
+                'Correo_Institucional.unique' => 'El correo ya se encuentra registrado en el sistema',
+                'Correo_Institucional.min' => 'El correo debe tener al menos 11 caracteres',
+                'Correo_Institucional.max' => 'El correo debe tener al menos 50 caracteres',
+                'Correo_Institucional.ends_with' => 'El correo debe terminar con el formato correcto, .com',
 
-            'Correo_Personal.required' => 'El correo es obligatorio',
-            'Correo_Personal.email' => 'El correo debe ser valido',
-            'Correo_Personal.unique' => 'El correo ya se encuentra registrado en el sistema',
-            'Correo_Personal.min' => 'El correo debe tener al menos 11 caracteres',
-            'Correo_Personal.max' => 'El correo debe tener al menos 50 caracteres',
-            'Correo_Personal.ends_with' => 'El correo debe terminar con el formato correcto, .com',
+                'Correo_Personal.required' => 'El correo es obligatorio',
+                'Correo_Personal.email' => 'El correo debe ser valido',
+                'Correo_Personal.unique' => 'El correo ya se encuentra registrado en el sistema',
+                'Correo_Personal.min' => 'El correo debe tener al menos 11 caracteres',
+                'Correo_Personal.max' => 'El correo debe tener al menos 50 caracteres',
+                'Correo_Personal.ends_with' => 'El correo debe terminar con el formato correcto, .com',
 
-            'Sexo.required' => 'El sexo es obligatorio',
+                'Sexo.required' => 'El sexo es obligatorio',
 
-            'FechaNac.required' => 'La fecha de nacimiento es obligatoria',
-            'FechaNac.before_or_equal' => 'La fecha de nacimiento no puede ser mayor a la fecha actual',
-            'tbl_eps_NIS.required' => 'La eps es obligatoria',
+                'FechaNac.required' => 'La fecha de nacimiento es obligatoria',
+                'FechaNac.before_or_equal' => 'La fecha de nacimiento no puede ser mayor a la fecha actual',
+                'tbl_eps_NIS.required' => 'La eps es obligatoria',
 
-        ]);
+            ]);
         DB::beginTransaction();
 
         try {
 
             $instructor = instructor::findOrFail($NIS);
-           $instructor->update([
+            $instructor->update([
                 'tbl_tipo_documentos_NIS' => $request->tbl_tipo_documentos_NIS,
                 'Numdoc' => $request->Numdoc,
                 'Nombres' => $request->Nombres,
@@ -268,7 +269,7 @@ class InstructorController extends Controller
             DB::commit();
             return redirect()->route('Instructores.index')->with('success', 'El instructor se ha actualizado correctamente');
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Error al actualizar el instructor');
         }
@@ -288,15 +289,15 @@ class InstructorController extends Controller
             DB::commit();
             return back()->with('success', 'El instructor se ha eliminado correctamente');
 
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Error al eliminar el instructor');
         }
     }
 
-    public function  VerBitacora()
+    public function VerBitacora()
     {
-       $instructor  = Auth::user()->instructor->users_id;
+        $instructor = Auth::user()->instructor->users_id;
 
         $aprendiz = aprendices::with('ficha_caracterizacion')
             ->whereRelation('ficha_caracterizacion', 'tbl_instructor_NIS', $instructor)
@@ -305,22 +306,25 @@ class InstructorController extends Controller
         return view('Bitacora.Bitacoras.bitacoras_aprendiz', compact('aprendiz'));
 
 
-
     }
 
+
+    // Ver la ficha del instructor logueado
     public function programa_asignado()
     {
         $fichas = Auth::user()->instructor->ficha;
+        $instructor = Auth::user()->instructor;
 
-        return view('Instructor.Programa_asignado.programa_asignado', compact('fichas'));
+        return view('Instructor.Programa_asignado.programa_asignado', compact('fichas', 'instructor'));
 
     }
 
+    //Ver los aprendices con su respectiva información donde las bitacoras están en estado creada
+    // Con su ficha asociadas
     public function Programa_aprendices($NIS)
     {
         $ficha = fichacaracterizacion::where('NIS', $NIS)->first();
         $aprendiz = aprendices::where('tbl_ficha_caracterizacion_NIS', $NIS)->withCount('bitacoras_pendientes')->paginate(10);
-
 
         return view('Instructor.Programa_asignado.aprendis_asignado', compact('ficha','aprendiz'));
 
@@ -328,7 +332,6 @@ class InstructorController extends Controller
 
     public function Aprendices_documentacion($NIS)
     {
-
 
         $aprendiz = aprendices::with('ficha_caracterizacion')->findOrFail($NIS);
         $ficha = $aprendiz->ficha_caracterizacion;
@@ -340,4 +343,136 @@ class InstructorController extends Controller
 
     }
 
+    // Metodo para Aprobar una bitacora donde se recibe el id de la bitacora y se consulta
+    //si existe esa bitacora y con un condicional se cambia el estado y se actualiza con save
+    // debido a esto se notifica aprendiz y al instructor
+    public function Aprobar_bitacora($id)
+    {
+
+        DB::beginTransaction();
+
+        try {
+
+            $bitacora = bitacora::findOrFail($id);
+            $aprendiz = $bitacora->aprendiz;
+
+
+            if ($bitacora->estado === 'Creada') {
+                $bitacora->estado = 'Aprobada';
+                $bitacora->save();
+
+            }
+
+            $instructor =  Auth::user()->instructor;
+
+            $aprendiz->notify(new BitacoraAprobadaNotification($aprendiz, $instructor));
+
+            $ficha = $instructor->ficha->first();
+
+            $instructor->notify(new BitacoraAprobadaInstructorNotification($aprendiz, $instructor, $ficha));
+
+            DB::commit();
+
+
+            return back()->with('success', 'El bitácora ha aprobada correctamente');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Error al aprobar la bitácora' . $e->getMessage());
+        }
+    }
+
+    // Mtodo para rechazar una bitacora donde se recibe el id de la bitacora y se consulta
+    //si existe esa bitacora y con un condicional se cambia el estado y se actualiza con save
+    // debido a esto se notifica aprendiz y al instructor
+    public function Rechazar_bitacora($id){
+
+        DB::beginTransaction();
+
+
+        try {
+
+            $bitacora = bitacora::findOrFail($id);
+            $aprendiz = $bitacora->aprendiz;
+
+
+            if ($bitacora->estado === 'Creada') {
+                $bitacora->estado = 'Rechazada';
+                $bitacora->save();
+            }
+
+            $instructor =  Auth::user()->instructor;
+
+            $aprendiz->notify(new BitacoraRechazadaNotification($aprendiz, $instructor));
+
+            $ficha = $instructor->ficha->first();
+
+            $instructor->notify(new BitacoraRechazadaInstructorNotification($aprendiz, $instructor, $ficha));
+
+            DB::commit();
+
+            return  back()->with('success', 'La bitácora se rechazó correctamente' );
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Error al rechazar la bitácora');
+        }
+    }
+
+
+    public function programa_asignado_aprobados()
+    {
+
+        $instructor = Auth::user()->instructor;
+        $fichas = Auth::user()->instructor->ficha;
+      return view('Instructor.Programa_asignado_aprobados.programa_asignado_aprobados', compact('instructor', 'fichas'));
+
+
+    }
+
+    public function programa_aprendices_aprobados($NIS)
+    {
+
+        $ficha = fichacaracterizacion::where('NIS', $NIS)->first();
+
+       // dd($ficha->Denominacion);
+        $aprendiz = aprendices::where('tbl_ficha_caracterizacion_NIS', $NIS)->withCount('bitacoras_aprobadas')->paginate(10);
+
+        return view('Instructor.Programa_asignado_aprobados.aprendiz_asignado_aprobados', compact('ficha','aprendiz'));
+
+    }
+
+
+    public  function Bitacora_aprendiz_aprobadas($NIS)
+    {
+        $aprendiz = aprendices::with('ficha_caracterizacion')->findOrFail($NIS);
+        $ficha = $aprendiz->ficha_caracterizacion;
+
+        $bitacora = bitacora::where('tbl_aprendices_NIS', $NIS)->where('Estado', 'Aprobada')->paginate(10);
+
+        return view('Bitacora.Bitacoras.bitacoras_aprendiz_aprobadas', compact('aprendiz','ficha','bitacora'));
+
+    }
+
+    public function Desaprobar_bitacora($id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $bitacora = bitacora::findOrFail($id);
+
+            if ($bitacora->estado === 'Aprobada') {
+                $bitacora->estado = 'Creada';
+                $bitacora->save();
+            }
+
+            DB::commit();
+
+           return  back()->with('success', 'La bitácora de desaprobó correctamente');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Error al desaprobar la bitácora' . $e->getMessage());
+        }
+
+
+    }
 }

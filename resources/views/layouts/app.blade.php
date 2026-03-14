@@ -12,7 +12,7 @@
     <title>
     @yield('title', 'SGEP')
    </title>
- 
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -31,7 +31,7 @@
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
 
-                
+
                 <a href="/" class="text-2xl font-bold text-black dark:text-white flex-shrink-0">
                     App<span class="text-blue-600">Seguimiento</span>
                 </a>
@@ -46,11 +46,9 @@
                     </svg>
                 </button>
 
-                <!-- Menú Móvil (Desplegable) -->
                 <div id="mobile-menu"
-                    class="hidden absolute top-full left-0 w-full bg-white z-50 border-b shadow-xl flex-col items-center p-6 gap-4 sm:hidden">
-                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium">Nosotros</a>
+                     class="hidden absolute top-full left-0 w-full bg-white z-50 border-b shadow-xl flex flex-col items-center text-center p-6 gap-4 sm:hidden">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 font-medium">Sobre nosotros</a>
                     <a href="#"
                         class="text-gray-600 hover:text-indigo-600 font-medium border-b w-full text-center pb-4">Contactos
                     </a>
@@ -76,7 +74,6 @@
                 <!-- Menú Desktop -->
                 <div class="hidden sm:flex items-center gap-4 md:gap-8">
                     <div class="flex items-center gap-4 md:gap-6 text-sm font-medium text-gray-600">
-                        <a href="{{ route('home') }}" class="hover:text-indigo-600 transition">Dashboard</a>
                         <a href="#" class="hover:text-indigo-600 transition">Sobre nosotros</a>
                         <a href="#" class="hover:text-indigo-600 transition">Contactos</a>
                     </div>
@@ -107,6 +104,21 @@
 
 
     </div>
+
+    <script >
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+            const toggle = document.getElementById("menu-toggle");
+            const menu = document.getElementById("mobile-menu");
+
+            toggle.addEventListener("click", function () {
+            menu.classList.toggle("hidden");
+        });
+
+        });
+
+    </script>
 </body>
 
 </html>
