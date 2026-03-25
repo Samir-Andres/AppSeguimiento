@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 @section('title', 'Perfil')
 
 @section('content_header')
@@ -33,7 +33,7 @@
                 </div>
 
 
-                <h2 class="mt-4 text-xl font-semibold text-gray-800">
+                <h1 class="mt-4 text-lg font-semibold text-gray-800">
 
                     @if($aprendiz)
                         {{ $aprendiz->Nombres }} {{ $aprendiz->Apellidos }}
@@ -43,25 +43,27 @@
                         {{ $user->name }}
                     @endif
 
-                </h2>
+                </h1>
 
                 <p class="text-sm text-gray-500">{{ $user->email }}</p>
 
 
-                <span class="mt-2 text-xs bg-blue-100 text-blue-600 px-3 py-1 rounded-full">
-
-                @if($aprendiz)
+                <span class="mt-2 text-xs px-3 py-1 rounded-full
+                    @if($aprendiz) bg-blue-100 text-blue-600
+                        @elseif($instructor) bg-green-100 text-green-600
+                         @elseif($rolAdministrativo) bg-purple-100 text-purple-600
+                  @else bg-gray-100 text-gray-600
+                         @endif">
+                    @if($aprendiz)
                         Aprendiz
                     @elseif($instructor)
                         Instructor
                     @elseif($rolAdministrativo)
-                        Administrativo
+                        {{ ucfirst(str_replace('_', ' ', $rolAdministrativo->nombre)) }}
                     @else
                         Usuario
                     @endif
-
-            </span>
-
+                    </span>
             </div>
 
 
@@ -98,14 +100,16 @@
             </div>
 
 
-            <!-- BOTONES -->
             <div class="bg-gray-50 px-6 py-4 flex gap-3">
 
-                <a href=""
+                <a href="{{ route('perfil.edit', $usuario->id) }}"
                    class="flex-1 text-center bg-white border border-gray-300 py-2 rounded text-sm font-medium text-gray-700 hover:bg-gray-100">
-
                     Gestionar
+                </a>
 
+                <a href="{{route('aprendiz.datos')}}"
+                   class="flex-1 text-center bg-indigo-500 hover:bg-indigo-600 transition text-white py-2 rounded text-sm font-medium">
+                    Ver datos personales
                 </a>
 
             </div>
@@ -114,71 +118,6 @@
 
     </div>
 
-
-
-    <!-- FORM ACTUALIZAR PERFIL -->
-
-    <div class="flex justify-center mt-10">
-
-        <form action="{{ route('ActualizarDatos.Perfil',$user->id) }}" class="bg-white p-6 rounded-lg shadow-md w-full max-w-2xl" method="POST">
-
-            @csrf
-            @method('PUT')
-
-            <h2 class="text-center text-2xl font-bold mb-6">Actualizar Perfil</h2>
-
-            <div class="grid md:grid-cols-2 gap-4">
-
-                <div>
-
-                    <label class="text-sm font-medium">Nombre</label>
-
-                    <input type="text"
-                           name="name"
-                           value="{{ old('name',$user->name) }}"
-                           class="w-full mt-1 p-2 border rounded-lg">
-
-                    @error('name')
-                    <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-
-                </div>
-
-
-                <div>
-
-                    <label class="text-sm font-medium">Correo</label>
-
-                    <input type="email"
-                           name="email"
-                           value="{{ old('email',$user->email) }}"
-                           class="w-full mt-1 p-2 border rounded-lg">
-
-                    @error('email')
-                    <p class="text-red-500 text-xs">{{ $message }}</p>
-                    @enderror
-
-                </div>
-
-            </div>
-
-            <div class="text-center mt-6">
-
-                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    Actualizar Perfil
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-
-
-    {{-- ========================= --}}
-    {{-- TARJETA DATOS APRENDIZ --}}
-    {{-- ========================= --}}
 
     @if($aprendiz)
 

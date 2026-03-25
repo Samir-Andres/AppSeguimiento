@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Seguimiento</title>
 
-    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
@@ -26,12 +25,10 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-2">
 
-            <!-- Logo (Añadido flex-shrink-0 para que no se achique) -->
             <a href="/" class="text-2xl font-bold text-black dark:text-white flex-shrink-0">
                 App<span class="text-blue-600">Seguimiento</span>
             </a>
 
-            <!-- Botón Hamburguesa (Móvil) -->
             <button aria-label="Menu" id="menu-toggle" class="sm:hidden p-2">
                 <svg width="21" height="15" viewBox="0 0 21 15" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +38,6 @@
                 </svg>
             </button>
 
-            <!-- Menú Móvil  -->
             <div id="mobile-menu"
                 class="hidden absolute top-full left-0 w-full bg-white z-50 border-b shadow-xl flex-col items-center p-6 gap-4 sm:hidden">
                 <a href="#nosotros" class="text-gray-600 hover:text-indigo-600 font-medium">Nosotros</a>
@@ -66,11 +62,10 @@
                 @endif
             </div>
 
-            <!-- Menú Desktop -->
             <div class="hidden sm:flex items-center gap-4 md:gap-8">
                 <div class="flex items-center gap-4 md:gap-6 text-sm font-medium text-gray-600">
                     <a href="#nosotros" class="hover:text-indigo-600 transition">Sobre nosotros</a>
-                    <a href="#" class="hover:text-indigo-600 transition">Contactos</a>
+                    <a href="{{route('contactanos.index')}}" class="hover:text-indigo-600 transition">Contactos</a>
                 </div>
 
                 <div class="flex items-center gap-2 border-l pl-4 border-gray-200">
@@ -210,6 +205,9 @@
     </div>
 
 
+
+
+
     <footer class="bg-black text-white py-12 md:py-16 px-4 sm:px-6 md:px-8 lg:px-20">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-8 md:gap-16">
 
@@ -266,7 +264,7 @@
                                 class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-green-950 border border-green-300 text-green-300">HIRING</span>
                         </li>
                         <li><a href="#" class="hover:text-white">Privacy policy</a></li>
-                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="" class="hover:text-white">Contactanos</a></li>
                     </ul>
                 </div>
             </div>

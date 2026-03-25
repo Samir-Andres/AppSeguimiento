@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Middleware\CheckRol;
 use App\Models\aprendices;
 use App\Models\instructor;
 use Illuminate\Database\QueryException;
@@ -9,38 +10,33 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class PerfilController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
 
-       $usuario = Auth::user();
-
-       $aprendiz = null;
-       $instructor = null;
-       $roles = null;
 
 
-       if ($usuario->aprendiz){
-           $aprendiz = $usuario->aprendiz;
+        $usuario = Auth::user();
 
-       }
-       if ($usuario->instructor){
-           $instructor = $usuario->instructor;
-
-       }
-       if ($usuario->roles){
-           $roles = $usuario->roles;
-
-       }
+        $aprendiz = $usuario->aprendiz;
+        $instructor = $usuario->instructor;
+        $rol = $usuario->roles;
 
 
+        $rolesAdministrativos = ['administrador', 'super_administrador', 'auxiliar', 'jefe_inmediato'];
 
-        return view('perfil.perfil', compact('usuario', 'aprendiz', 'instructor', 'roles'));
+        $rolAdministrativo = $rol && in_array($rol->nombre, $rolesAdministrativos) ? $rol : null;
+
+
+        return view('perfil.perfil', compact('usuario', 'aprendiz', 'instructor', 'rol', 'rolAdministrativo'));
     }
 
     /**
@@ -48,7 +44,7 @@ class PerfilController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -70,8 +66,11 @@ class PerfilController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
+
+        $usuario = User::findOrFail($id);
+        return view('perfil.edit', compact('usuario'));
 
     }
 
@@ -111,15 +110,11 @@ class PerfilController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Actualizado correctamente');
+            return back()->with('success', 'Actualizado correctamente');
 
         }catch (QueryException $e){
-            return back()->with('error', 'Error al actualizar los datos. Intente nuevamente.');
             DB::rollBack();
-        }catch (\Exception $e){
             return back()->with('error', 'Error al actualizar los datos. Intente nuevamente.');
-            DB::rollBack();
-
         }
 
 
@@ -131,5 +126,72 @@ class PerfilController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public  function  editPassword($id)
+    {
+
+        $usuario = User::findOrFail($id);
+        return view('perfil.auth.password', compact('usuario'));
+    }
+
+
+    public  function  updatePassword(Request $request, $id)
+    {
+
+        $request->validate([
+            'current_password'      => 'required',
+            'password'              => 'required|min:8|confirmed',
+            'password_confirmation' => 'required',
+        ], [
+            'current_password.required'      => 'La contraseña actual es obligatoria.',
+            'password.required'              => 'La nueva contraseña es obligatoria.',
+            'password.min'                   => 'La contraseña debe tener al menos 8 caracteres.',
+            'password.confirmed'             => 'Las contraseñas no coinciden.',
+            'password_confirmation.required' => 'Debes confirmar la nueva contraseña.',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $usuario = Auth::user(); // ← usuario logueado
+
+
+            // Verifica que la contraseña actual sea correcta
+            if (!Hash::check($request->current_password, $usuario->password)) {
+                return back()->withErrors([
+                    'current_password' => 'La contraseña actual no es correcta.'
+                ]);
+            }
+
+            $usuario->update([
+                'password' => Hash::make($request->password)
+            ]);
+
+            DB::commit();
+
+            return  back()->with('success', 'La contraseña se ha actualizado correctamente.');
+        }catch (QueryException $e){
+            DB::rollBack();
+            return back()->with('error', 'Error al actualiza la contraseña');
+
+        }
+
+
+
+
+
+
+    }
+
+    public function datosAprendiz()
+    {
+        $usuario = Auth::user();
+        $aprendiz = $usuario->aprendiz;
+        return view('perfil.aprendiz.datos_personales', compact('usuario', 'aprendiz'));
+
+
     }
 }

@@ -315,66 +315,85 @@ return [
         [
             'text' => 'Cargar bitácoras',
             'url' => '/Bitacoras',
-            'icon' => 'far fa-file-pdf'
+            'icon' => 'far fa-file-pdf',
+            'can' => 'cargar-bitacoras'
         ],
         [
             'text' => 'Ver Programa',
             'url' => '/Ver/Programa',
-            'icon' => 'far fa-file-pdf'
+            'icon' => 'fas fa-book',
+            'can' => 'ver-programa',
+            'icon_color' => 'warning',
+        ],
+        [
+            'text' => 'Usuarios y Roles',
+            'url' => '/Registrar/usuarios',
+            'icon' => 'fas fa-user-shield',
+            'icon_color' => 'info',
+            'can' => 'registrar-usuario'
         ],
 
         [
             'text' => 'Registros',
             'icon' => 'fas fa-plus-circle',
             'icon_color' => 'success',
+            'can' => 'manage-registros',
             'submenu' => [
                 [
                     'text' => 'Eps',
                     'url' => '/Eps/index',
                     'icon' => 'fas fa-hospital',
+                    'icon_color' => 'info',
                 ],
                 [
                     'text' => 'Roles',
                     'url' => '/Rolesadministrativos',
                     'icon' => 'fas fa-users-cog',
+                    'icon_color' => 'info',
                 ],
                 [
                     'text' => 'Tipo de Documento',
                     'url' => '/TipoDocumentos',
                     'icon' => 'fas fa-id-card',
+                    'icon_color' => 'warning',
                 ],
                 [
                     'text' => 'Instructores',
                     'url' => '/Instructores',
                     'icon' => 'fas fa-chalkboard-teacher',
+                    'icon_color' => 'info',
                 ],
                 [
                     'text' => 'Aprendices',
                     'url' => '/Aprendices',
                     'icon' => 'fas fa-user-graduate',
-                ],
-                [
-                    'text' => 'Ver Bitácoras',
-                    'url' => '',
-                    'icon' => 'far fa-file-pdf',
+                    'icon_color' => 'info',
                 ],
                 [
                     'text' => 'Ficha Caracterización',
                     'url' => '/Ficha_caracterizacion',
                     'icon' => 'far fa-folder',
+                    'icon_color' => 'warning',
                 ],
                 [
                     'text' => 'Entecoformadores',
                     'url' => '/Entecoformadores',
                     'icon' => 'fas fa-user',
+                    'icon_color' => 'info',
                 ],
             ],
         ],
-        ['header' => 'Bitácoras aprobadas'],
+        [
+            'header' => 'Bitácoras aprobadas',
+            'can' => 'ver-programa',
+
+        ],
          [
             'text' => 'Bitácoras aprobadas',
              'url' => '/Ver/Programa/Aprobado',
              'icon' => 'far fa-file-pdf',
+             'icon_color' => 'danger',
+             'can' => 'ver-programa'
          ],
 
 
@@ -384,11 +403,13 @@ return [
             'text' => 'Contraseña',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock text-primary',
+            'icon_color' => 'info',
         ],
         [
             'text' => 'profile',
             'url' => '/perfil',
             'icon' => 'fas fa-fw fa-user text-success',
+            'icon_color' => 'info',
         ],
     ],
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlternativaController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ProgramaformacionController;
 use App\Http\Controllers\RolesadministrativosController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\EntecoformadoresController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\FichacaracterizacionController;
+use \App\Http\Controllers\Auth\RegisterUserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,8 +29,25 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/Contactanos', [ContactanosController::class, 'index'] )->name('contactanos.index');
+Route::post('/Contactanos/informacion', [ContactanosController::class, 'Informacion'])->name('contactanos.Informacion');
+
 Route::get('/perfil', [PerfilController::class, 'index'])->name('perfil.userLogueado');
+// Ver formulario
+Route::get('/perfil/editar/{id}', [PerfilController::class, 'edit'])->name('perfil.edit');
+//Actualizar perfil
+Route::put('/perfil/editar/{id}', [PerfilController::class, 'update'])->name('perfil.update');
+
 Route::post('/Perfil/update/{id}', [PerfilController::class, 'update'])->name('ActualizarDatos.Perfil');
+
+//Cambiar contraseña
+Route::get('/perfil/password/{id}', [PerfilController::class, 'editPassword'])->name('perfil.password.edit');
+Route::put('/perfil/password/{id}', [PerfilController::class, 'updatePassword'])->name('password.updatePassword');
+
+
+//Datos personales
+Route::get('/aprendiz/datos', [PerfilController::class, 'datosAprendiz'])->name('aprendiz.datos');
+Route::put('/aprendiz/datos/{nis}', [PerfilController::class, 'updateAprendiz'])->name('aprendiz.update');
 
 
 // Rutas de alternativas a etapa productiva
@@ -80,36 +99,38 @@ Route::get('/clear', function () {
 Route::resource('/Aprendices', AprendicesController::class)->middleware('auth');
 
 //Rutas de las bitacoras
-Route::resource('/Bitacoras', BitacoraController::class)->middleware('auth');
+Route::resource('/Bitacoras', BitacoraController::class)->middleware(['auth', 'checkrol:aprendiz']);
 Route::get('/Bitacora/{id}/download', [BitacoraController::class, 'download'] )->name('bitacora.download')->middleware('auth');
 Route::get('/Qr', [QrCodeController::class, 'index'] )->name('bitacora.qr')->middleware('auth');
 
 Route::resource('/Ficha_caracterizacion', FichacaracterizacionController::class)->middleware('auth');
-
 //Ruta resource para ente conformadores donde contendrá los métodos CRUD
 Route::resource('/Entecoformadores', EntecoformadoresController::class)->middleware('auth');
 
-
-
 Route::resource('/Instructores', InstructorController::class)->middleware('auth');
 
-//Rutas para ver los programas asignados del instructor logueado
+
+
+//Route::middleware(['auth', 'checkrol:administrador,auxiliar, instructor, super_administrador'])->group(function () {
+
+    //Rutas para ver los programas asignados del instructor logueado
 //Rutas donde ver la documentación de los aprendices con sus respectivas rutas para rechazar y aprobar bitácoras
-Route::get('/Ver/Programa', [InstructorController::class, 'programa_asignado'])->name('ver.programa')->middleware('auth');
-Route::get('/Ver/Aprendices/{NIS}', [InstructorController::class, 'Programa_aprendices'])->name('ver.aprendices')->middleware('auth');
-Route::get('/Ver/Documentacion/{NIS}', [InstructorController::class, 'Aprendices_documentacion'])->name('ver.documentacion')->middleware('auth');
-Route::put('/Cambiar/estado/{id}', [InstructorController::class, 'Aprobar_bitacora'])->name('aprobar.bitacora')->middleware('auth');
-Route::put('/Rechazar/Bitacora/{id}', [InstructorController::class, 'Rechazar_bitacora'])->name('rechazar.bitacora')->middleware('auth');
+    Route::get('/Ver/Programa', [InstructorController::class, 'programa_asignado'])->name('ver.programa')->middleware('auth');
+    Route::get('/Ver/Aprendices/{NIS}', [InstructorController::class, 'Programa_aprendices'])->name('ver.aprendices')->middleware('auth');
+    Route::get('/Ver/Documentacion/{NIS}', [InstructorController::class, 'Aprendices_documentacion'])->name('ver.documentacion')->middleware('auth');
+    Route::put('/Cambiar/estado/{id}', [InstructorController::class, 'Aprobar_bitacora'])->name('aprobar.bitacora')->middleware('auth');
+    Route::put('/Rechazar/Bitacora/{id}', [InstructorController::class, 'Rechazar_bitacora'])->name('rechazar.bitacora')->middleware('auth');
 
 //Rutas para ver los programas que se le esta haciendo seguimineto
-Route::get('/Ver/Programa/Aprobado', [InstructorController::class, 'programa_asignado_aprobados'])->name('ver.programa.aprobados')->middleware('auth');
-Route::get('/Ver/Aprendiz/Aprobados/{NIS}', [InstructorController::class, 'programa_aprendices_aprobados'])->name('ver.aprendices.aprobados')->middleware('auth');
-Route::get('/Ver/Bitacoras/Aprobada/{NIS}', [InstructorController::class, 'Bitacora_aprendiz_aprobadas'])->name('ver.bitacoras.aprobada')->middleware('auth');
+    Route::get('/Ver/Programa/Aprobado', [InstructorController::class, 'programa_asignado_aprobados'])->name('ver.programa.aprobados')->middleware('auth');
+    Route::get('/Ver/Aprendiz/Aprobados/{NIS}', [InstructorController::class, 'programa_aprendices_aprobados'])->name('ver.aprendices.aprobados')->middleware('auth');
+    Route::get('/Ver/Bitacoras/Aprobada/{NIS}', [InstructorController::class, 'Bitacora_aprendiz_aprobadas'])->name('ver.bitacoras.aprobada')->middleware('auth');
+    Route::put('/Desaprobar/Bitacora/{id}', [InstructorController::class, 'Desaprobar_bitacora'])->name('desaprobar.bitacora')->middleware('auth');
 
-Route::put('/Desaprobar/Bitacora/{id}', [InstructorController::class, 'Desaprobar_bitacora'])->name('desaprobar.bitacora')->middleware('auth');
+//});
 
 
-
+Route::resource('/Registrar/usuarios', RegisterUserController::class)->middleware(['auth', 'checkrol:super_administrador']);
 
 
 
