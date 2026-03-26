@@ -11,6 +11,7 @@
          data-error="{{ session('error') }}">
     </div>
 
+
     <div class="flex items-center justify-center px-2 py-10">
 
         <div class="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -107,7 +108,7 @@
             <div class="bg-gray-50 border-t border-gray-100 px-8 py-4 text-center">
                 <p class="text-xs text-gray-400">
                     ¿Solo quieres cambiar tu contraseña?
-                    <a href="{{route('perfil.password.edit', $usuario->id)}}" class="text-indigo-500 hover:underline font-medium">
+                    <a href="{{route('perfil.password.edit')}}" class="text-indigo-500 hover:underline font-medium">
                         Clic aquí
                     </a>
                 </p>
@@ -116,6 +117,7 @@
         </div>
 
     </div>
+
 
 @endsection
 

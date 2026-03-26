@@ -134,8 +134,8 @@
                             <label class="block text-xs font-medium text-gray-500 mb-1.5 uppercase">Sexo</label>
                             <select name="Sexo"   class="w-full px-3 py-2.5 border border-gray-200 rounded-xl  text-sm outline-none bg-white focus:border-indigo-500 transition-colors text-gray-500">
                                 <option value="">Seleccione</option>
-                                <option value="0">Femenino</option>
-                                <option value="1">Masculino</option>
+                                <option value="0">Masculino</option>
+                                <option value="1">Femenino</option>
                             </select>
                             @error('Sexo')
                             <p class="text-red-500 text-xs mb-0 pl-2 text-center">{{ $message }}</p>

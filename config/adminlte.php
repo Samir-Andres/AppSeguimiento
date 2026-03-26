@@ -401,7 +401,7 @@ return [
 
         [
             'text' => 'Contraseña',
-            'url' => 'admin/settings',
+            'url' => '/perfil/password',
             'icon' => 'fas fa-fw fa-lock text-primary',
             'icon_color' => 'info',
         ],

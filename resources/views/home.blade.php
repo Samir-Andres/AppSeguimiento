@@ -20,6 +20,7 @@
     </div>
 
     <div class="flex flex-wrap items-center justify-center gap-6 max-w-6xl w-full">
+
          <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-lg p-4 flex flex-col items-center">
              <div class="w-full max-w-56 flex flex-col h-full">
                 <h3 class="text-base font-medium text-slate-900 mb-2">
@@ -39,7 +40,11 @@
                 </div>
             </div>
         </div>
-        <!-- Card 2 -->
+
+
+        @can('es-super_administrador')
+
+
          <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-lg p-4 flex flex-col items-center">
              <div class="w-full max-w-56 flex flex-col h-full">
                 <h3 class="text-base font-medium text-slate-900 mb-2">
@@ -119,6 +124,8 @@
                 </div>
             </div>
         </div>
+
+        @endcan
     </div>
 
    <!-- <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-lg p-4 flex flex-col items-center">

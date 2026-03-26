@@ -52,6 +52,7 @@
                     @if($aprendiz) bg-blue-100 text-blue-600
                         @elseif($instructor) bg-green-100 text-green-600
                          @elseif($rolAdministrativo) bg-purple-100 text-purple-600
+
                   @else bg-gray-100 text-gray-600
                          @endif">
                     @if($aprendiz)
@@ -107,126 +108,28 @@
                     Gestionar
                 </a>
 
-                <a href="{{route('aprendiz.datos')}}"
-                   class="flex-1 text-center bg-indigo-500 hover:bg-indigo-600 transition text-white py-2 rounded text-sm font-medium">
-                    Ver datos personales
-                </a>
+
+
+                @can('es-aprendiz')
+                    <a href="{{route('aprendiz.datos')}}"
+                       class="flex-1 text-center bg-indigo-500 hover:bg-indigo-600 transition text-white py-2 rounded text-sm font-medium">
+                        Ver datos personales
+                    </a>
+                @endcan
+
+                @can('es-Instructor')
+                    <a href="{{route('instructor.datos')}}"
+                       class="flex-1 text-center bg-indigo-500 hover:bg-indigo-600 transition text-white py-2 rounded text-sm font-medium">
+                        Ver datos personales
+                    </a>
+                @endcan
+
 
             </div>
 
         </div>
 
     </div>
-
-
-    @if($aprendiz)
-
-        <div class="max-w-4xl mx-auto my-10 bg-white shadow-xl rounded-2xl overflow-hidden border">
-
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-10 text-white text-center">
-
-                <h1 class="text-3xl font-bold">
-                    {{ $aprendiz->Nombres }} {{ $aprendiz->Apellidos }}
-                </h1>
-
-                <p class="text-blue-100 mt-1">
-                    NIS: {{ $aprendiz->NIS }}
-                </p>
-
-            </div>
-
-
-            <div class="p-8 grid md:grid-cols-2 gap-8">
-
-                <div>
-
-                    <h3 class="font-bold text-indigo-600 mb-3">Datos Personales</h3>
-
-                    <p><b>Documento:</b> {{ $aprendiz->Numdoc }}</p>
-
-                    <p><b>Fecha Nacimiento:</b>
-                        {{ \Carbon\Carbon::parse($aprendiz->FechaNac)->format('d/m/Y') }}
-                    </p>
-
-                    <p><b>Sexo:</b>
-                        {{ $aprendiz->Sexo == 1 ? 'Masculino' : 'Femenino' }}
-                    </p>
-
-                </div>
-
-
-                <div>
-
-                    <h3 class="font-bold text-indigo-600 mb-3">Contacto</h3>
-
-                    <p><b>Teléfono:</b> {{ $aprendiz->Telefono }}</p>
-
-                    <p><b>Dirección:</b> {{ $aprendiz->Direccion }}</p>
-
-                    <p><b>Correo Institucional:</b>
-                        {{ $aprendiz->Correo_Institucional }}
-                    </p>
-
-                    <p><b>Correo Personal:</b>
-                        {{ $aprendiz->Correo_Personal }}
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @endif
-
-
-
-    {{-- ========================= --}}
-    {{-- TARJETA DATOS INSTRUCTOR --}}
-    {{-- ========================= --}}
-
-    @if($instructor)
-
-        <div class="max-w-4xl mx-auto my-10 bg-white shadow-xl rounded-2xl overflow-hidden border">
-
-            <div class="bg-gradient-to-r from-green-600 to-emerald-700 px-8 py-10 text-white text-center">
-
-                <h1 class="text-3xl font-bold">
-                    {{ $instructor->Nombres }} {{ $instructor->Apellidos }}
-                </h1>
-
-                <p class="opacity-80">
-                    Instructor
-                </p>
-
-            </div>
-
-
-            <div class="p-8 grid md:grid-cols-2 gap-8">
-
-                <div>
-
-                    <p><b>Documento:</b> {{ $instructor->Numdoc }}</p>
-
-                    <p><b>Teléfono:</b> {{ $instructor->Telefono }}</p>
-
-                </div>
-
-
-                <div>
-
-                    <p><b>Correo:</b> {{ $instructor->Correo }}</p>
-
-                    <p><b>Especialidad:</b> {{ $instructor->Especialidad ?? 'No registrada' }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @endif
-
 
 @endsection
 

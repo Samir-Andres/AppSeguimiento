@@ -39,6 +39,7 @@ class CheckRol
             }
         }
 
-        return redirect('/home');
+        return abort(403, 'No tienes permisos para acceder');
+
     }
 }
