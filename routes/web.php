@@ -139,6 +139,8 @@ Route::middleware(['auth', 'checkrol:aprendiz'])->group(function () {
 });
 
 
+
+
 //Cambiar contraseña
 Route::get('/perfil/password', [PerfilController::class, 'editPassword'])->name('perfil.password.edit');
 Route::put('/perfil/password/{id}', [PerfilController::class, 'updatePassword'])->name('password.updatePassword');
